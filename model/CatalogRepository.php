@@ -58,7 +58,7 @@ class CatalogRepository implements Entity {
     public function findBestHome() {
 
         $maVar1 = 0; // nombre de départ
-        $maVar2i = 5; // nombre de choses a afficher 
+        $maVar2i = 5; // nombre de répétition à afficher 
 
         try
         {

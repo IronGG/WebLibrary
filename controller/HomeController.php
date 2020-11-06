@@ -58,6 +58,23 @@ class HomeController extends Controller {
     }
 
     /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function newBookAction() {
+
+        $view = file_get_contents('view/page/home/newBook.php');
+
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    /**
      * Check Form action
      *
      * @return string
