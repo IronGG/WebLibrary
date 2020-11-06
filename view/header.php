@@ -17,6 +17,9 @@
                 <a class="nav-link" href="index.php?controller=home&action=Apropos">A propos</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="index.php?controller=home&action=newBook">Ajouter un livre</a>
+            </li>
+            <li class="nav-item">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-delay=10000 title="Vous devez être connectés pour pouvoir ajouter un livre.">
                     <a class="nav-link disabled" href="newBook.php" tabindex="-1" aria-disabled="true">Ajouter un livre</a>
                 </span>
