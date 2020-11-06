@@ -1,4 +1,3 @@
-<?php session_start(); // Démarrer le système de session ?>
 <!doctype html>
 <html lang="en">
 

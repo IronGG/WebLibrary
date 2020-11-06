@@ -74,10 +74,15 @@ class MainController {
 
             $content = $currentPage->display();
 
-            include(dirname(__FILE__) . '/view/head.php');
-            include(dirname(__FILE__) . '/view/header.php');
-            echo $content;
-            include(dirname(__FILE__) . '/view/footer.php');
+            if($currentPage instanceof LoginController){
+                echo $content;
+            }
+            else{
+                include(dirname(__FILE__) . '/view/head.php');
+                include(dirname(__FILE__) . '/view/header.php');
+                echo $content;
+                include(dirname(__FILE__) . '/view/footer.php');
+            }
     }
 }
 
