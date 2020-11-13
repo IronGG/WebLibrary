@@ -31,30 +31,6 @@ class CatalogRepository implements Entity {
 
     }
 
-    /**
-     * Find One entry
-     *
-     * @param $idProduct
-     *
-     * @return array
-     */
-    public function findOne($idCustomer) {
-
-        include './data/customers.php';
-        
-        $customerCurrent = array();
-
-        // Boucler sur tous les clients et sélectionner seulement celui que l'on veut afficher
-        foreach($customers as $customer) {
-
-            if($customer['idContact'] == $idCustomer){
-                $customerCurrent = $customer;
-            }
-        }
-
-        return $customerCurrent;
-    }
-
     public function findBestHome() {
 
         $maVar1 = 0; // nombre de départ

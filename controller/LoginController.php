@@ -6,7 +6,6 @@
  * Controler pour gérer les pages classiques
  */
 
-include_once 'model/LoginRepository.php';
 
 class LoginController extends Controller {
 
