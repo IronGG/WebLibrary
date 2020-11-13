@@ -6,6 +6,7 @@
  * Controler pour gérer les pages classiques
  */
 
+include_once 'model/RegisterRepository.php';
 
 class LoginController extends Controller {
 
@@ -37,15 +38,25 @@ class LoginController extends Controller {
         return $content;
     }
 
-    /**
-     * Display Contact Action
-     *
-     * @return string
-     */
-    private function contactAction() {
+    private function registerAction() {
+        //$registerRepository = new RegisterRepository();
+        //$compte = $registerRepository->login('test')->fetchAll();*/
 
-        $view = file_get_contents('view/page/home/contact.php');
+        $view = file_get_contents('view/page/login/register.php');
 
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    private function loginAction() {
+
+        $registerRepository = new RegisterRepository();
+        $compte = $registerRepository->login($_POST['username'])->fetchAll();
+
+        $view = file_get_contents('view/page/login/logintest.php');
 
         ob_start();
         eval('?>' . $view);

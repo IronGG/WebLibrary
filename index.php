@@ -74,7 +74,7 @@ class MainController {
 
             $content = $currentPage->display();
 
-            if($currentPage instanceof LoginController){
+            if($currentPage instanceof LoginController && $_GET['action'] == 'index'){
                 echo $content;
             }
             else{

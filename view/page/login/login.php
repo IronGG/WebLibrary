@@ -50,8 +50,6 @@
     echo '<h1 class="text-center mt-5">' . $_SESSION['username'] . '</h1>'*/
 
 
-
-    
     // SQL stuff
     try
     {
@@ -71,10 +69,6 @@
         echo "Error: " . $insertUser . "<br>";
     }
 
-
-
-
-    //PAS SA
     //$insertUtil = $bdd->query($insertUser);
 
 
