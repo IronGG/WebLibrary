@@ -1,9 +1,30 @@
 <div class="container-xl">
-    <h1 class="text-left mt-5 mb-5">Catalogue</h1>
+    <h1 class="text-left mt-5 mb-3">Catalogue</h1>
+    <p>
+        <button class="btn btn-primary btn-light border" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filtrer</button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body mb-3">
+            <form method="post" name="formStage" action="index.php?controller=catalog&action=index">
+                <div class="row">
+                    <?php
+                        foreach($lstCategories as $category)
+                        {
+                            echo '<div class="col-4 text-center">';
+                            echo '<p class="lead"><input type="checkbox" name="catChoose[]" value='. $category["idCategorie"].'> ' . $category["catName"] . '</p>';
+                            echo '</div>';
+                        }
+                    ?>
+                    </div>
+                <p class="text-center mt-3">
+                    <input type="submit" name="btnSubmit" class="btn btn-outline-primary" value="Rechercher"/>
+                </p>
+            </form>
+        </div>
+    </div>
     <div class="row row-cols-1 row-cols-md-5">
     <?php
 
-        //while ($book = $books->fetch())
         foreach($books as $book)
         {
         
@@ -19,8 +40,12 @@
         </div>
     <?php
         }
-        $books->closeCursor()
     ?>
+
+
+
+
+
         <div class="col mb-4">
             <div class="card h-100">
                 <img src="resources/images/NoGameNoLife.jpg" class="card-img-top" alt="...">

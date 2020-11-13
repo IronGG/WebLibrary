@@ -10,6 +10,55 @@ include_once 'Entity.php';
 
 class CatalogRepository implements Entity {
 
+    // Variable de classe
+    private $connector;
+
+    /**
+    * Constructeur de Database
+    */
+    public function __construct()
+    {
+        $this->connector = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
+    }
+
+    /**
+    * Simple requête
+    */
+    private function querySimpleExecute($query)
+    {
+        $req = $this->connector->query($query);
+        return $req;
+    }
+
+    /**
+    * Préparer et executer une requête
+    */
+    private function queryPrepareExecute($query, $binds)
+    {
+        $req = $this->connector->prepare($query);
+        $req->execute();
+        return $req;
+    }
+
+    /**
+    * Formater la requête dans un tableau
+    */
+    private function formatData($req)
+    {
+
+        $listOfItem = $req->fetchALL(PDO::FETCH_ASSOC);
+        return $listOfItem;
+    }
+
+    /**
+    * vide la requête
+    */
+    private function unsetData($req)
+    {
+
+        $req->closeCursor();
+    }
+
     /**
      * Récupérer tous les clients
      *
@@ -17,38 +66,57 @@ class CatalogRepository implements Entity {
      */
     public function findAll() {
 
-        try
-        {
-            $bdd = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
-        }
-        catch (Exception $e)
-        {
-                die('Erreur : ' . $e->getMessage());
-        }
-        $lstCat = $bdd->query("SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie");
+        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie";
+        $req = $this->querySimpleExecute($queryToUse);
+        $books = $this->formatData($req);
+        $req = $this->unsetData($req);
 
-        return $lstCat;
+        return $books;
 
     }
 
     public function findBestHome() {
 
         $maVar1 = 0; // nombre de départ
-        $maVar2i = 5; // nombre de répétition à afficher 
+        $maVar2i = 5; // nombre de répétition à afficher
+        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie LIMIT $maVar1, $maVar2i";
+        $req = $this->querySimpleExecute($queryToUse);
+        $books = $this->formatData($req);
+        $req = $this->unsetData($req);
 
-        try
-        {
-            $bdd = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
-        }
-        catch (Exception $e)
-        {
-                die('Erreur : ' . $e->getMessage());
-        }
-        $lstCat = $bdd->query("SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie LIMIT $maVar1, $maVar2i");
+        return $books;
+
+    }
+    public function findAllCat() {
+
+        $queryToUse = "SELECT * FROM t_categorie";
+        $req = $this->querySimpleExecute($queryToUse);
+        $lstCat = $this->formatData($req);
+        $req = $this->unsetData($req);
 
         return $lstCat;
 
     }
+    public function findSpecialBook($specialCat) {
 
+        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie where ";
+        $i = 0;
+        foreach($specialCat as $oneCat)
+        {
+            if($i == 0)
+            {
+                $queryToUse = $queryToUse . "idCategorie = ". $oneCat;
+            }
+            else
+            {
+                $queryToUse = $queryToUse . " or idCategorie = ". $oneCat;
+            }
+            $i++;
+        }
+        $req = $this->querySimpleExecute($queryToUse);
+        $lstCat = $this->formatData($req);
+        $req = $this->unsetData($req);
 
+        return $lstCat;
+    }
 }
