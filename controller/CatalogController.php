@@ -24,10 +24,17 @@ class CatalogController extends Controller {
     }
 
     private function indexAction() {
-
         // Instancie le modèle et va chercher les informations
         $catalogRepository = new CatalogRepository();
-        $books = $catalogRepository->findAll();
+        $lstCategories = $catalogRepository->findAllCat();
+        if(!isset($_POST["catChoose"]))
+        {
+            $books = $catalogRepository->findAll();
+        }
+        else
+        {
+            $books = $catalogRepository->findSpecialBook($_POST["catChoose"]);
+        }
 
         // Charge le fichier pour la vue
         $view = file_get_contents('view/page/catalog/list.php');
