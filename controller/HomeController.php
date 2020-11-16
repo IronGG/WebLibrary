@@ -63,6 +63,8 @@ class HomeController extends Controller {
      * @return string
      */
     private function newBookAction() {
+        $catalogRepository = new CatalogRepository();
+        $lstCategories = $catalogRepository->findAllCat();
 
         $view = file_get_contents('view/page/home/newBook.php');
 
