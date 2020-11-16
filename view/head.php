@@ -1,4 +1,11 @@
-<?php session_start(); // Démarrer le système de session ?>
+<?php 
+    //session_start(); // Démarrer le système de session  
+    
+/*
+if($_SESSION == array()){
+    session_start(); // Démarrer le système de session  
+}*/
+?>
 <!doctype html>
 <html lang="en">
 

@@ -1,7 +1,11 @@
 <!-- Site footer -->
 <footer class="footer mt-5">
     <div class="container-fluid bg-dark py-5">
-        <span class="text-light">Place sticky footer content here.</span>
+        <div class="d-flex justify-content-around text-light">
+            <div>FIN2</div>
+            <div>16.11.2020</div>
+            <div>ETML 2020</div>
+        </div>
     </div>
 </footer>
 

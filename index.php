@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * ETML
  * Auteur :  Cindy Hardegger
@@ -74,6 +74,11 @@ class MainController {
 
             $content = $currentPage->display();
 
+            //var_dump($_POST);   
+            if(array_key_exists('disconnect', $_POST) && $_POST['disconnect']){
+                    $_SESSION = array();
+            }
+
             if($currentPage instanceof LoginController && $_GET['action'] == 'index'){
                 echo $content;
             }
@@ -83,6 +88,8 @@ class MainController {
                 echo $content;
                 include(dirname(__FILE__) . '/view/footer.php');
             }
+
+            //RAJOUTER controle de connexion sur newbook
     }
 }
 
