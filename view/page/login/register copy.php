@@ -36,18 +36,16 @@
         }
     }
 
-
-    /*
-
     $_SESSION['account'] = array('username' => $_SESSION['username'], 'email' => $_SESSION['email'],  'password' => $_SESSION['password']);
 
     var_dump($_SESSION['account']);
+
+    var_dump($_POST);
     
     echo '<h1>' . $_SESSION['username'] . '</h1>';
     echo '<h1>' . $_SESSION['email'] . '</h1>';
     echo '<h1>' . $_SESSION['password'] . '</h1>';
 
-*/
 
 
     /*if(isset($_POST['username'])){
@@ -57,7 +55,10 @@
     echo '<h1 class="text-center mt-5">' . $_SESSION['username'] . '</h1>'*/
 
 
+
+
     /*
+        
     // SQL stuff
     try
     {
@@ -77,9 +78,12 @@
         echo "Error: " . $insertUser . "<br>";
     }
 
+
+*/
+
+    //PAS SA
     //$insertUtil = $bdd->query($insertUser);
 
 
     echo "<h3>tout est dans la bd</h3>";
-    */
     ?>

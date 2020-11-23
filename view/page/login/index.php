@@ -10,8 +10,13 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 
-<body>
-
+<body <?php if($_SESSION['registerError']) echo 'onload="RegisterError()"'?>>
+<script type="text/javascript">
+    function RegisterError()
+        {
+            document.getElementById("register-form-link").click(); // Simulates button click
+        }
+</script>
 <div class="container">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -30,6 +35,22 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
+								<?php
+								if(array_key_exists('loginError', $_SESSION)){
+									if($_SESSION['loginError']){
+										echo '								
+										<div class="text-danger mb-5">
+										<h4>
+											<ul>' .
+											  "<li>nom d'utilisateur ou mot de passe erroné</li>"
+											. '</ul>
+										</h4>
+									</div>';
+									$_SESSION['loginError'] = false;
+									}
+								}
+
+								?>
 								<form id="login-form" action="index.php?controller=login&action=login" method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
@@ -59,6 +80,22 @@
 									</div>
 								</form>
 								<form id="register-form" action="index.php?controller=login&action=register" method="post" role="form" style="display: none;">
+								<?php
+								if(array_key_exists('registerError', $_SESSION)){
+									if($_SESSION['registerError']){
+										echo '								
+										<div class="text-danger mb-5">
+										<h4>
+											<ul>' .
+											  "<li>Erreurs insérées non valides</li>"
+											. '</ul>
+										</h4>
+									</div>';
+									$_SESSION['registerError'] = false;
+									}
+								}
+
+								?>
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>

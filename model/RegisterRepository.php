@@ -46,9 +46,9 @@ class RegisterRepository implements Entity {
 
     }
 
-    public function insertIntoDB() {
+    public function register($username, $password) {
 
-        $insertUser = "INSERT INTO t_utilisateur (utiPseudo, utiPassword) VALUES ('" . $_SESSION['username'] . "' , '" . $_SESSION['password'] . "' )";
+        $insertUser = "INSERT INTO t_utilisateur (utiPseudo, utiPassword, utiDate) VALUES ('" . $username . "' , '" . $password . "', CURDATE())";
 
         if ($this->bdd->query($insertUser) == TRUE) {
             echo "New record created successfully";
@@ -65,12 +65,46 @@ class RegisterRepository implements Entity {
         return $userList;
     }
 
-    public function register($username, $password) {
+    public function accountCreation() {
 
-        $userList = $this->bdd->query("SELECT * FROM t_utilisateur WHERE utiPseudo = '$username'");
+        if($this->accountVerification()){
+            $this->register($_POST['username'], $_POST['password']);
+        }
 
-        return $userList;
+
     }
 
+    public function accountVerification() {
+
+        $valid = false;
+
+        if(array_key_exists('username', $_POST)) {
+            if(preg_match ('/.{1,50}/', $_POST['username']) == 1){  
+    
+                if(array_key_exists('password', $_POST) && array_key_exists('confirm-password', $_POST)) {
+    
+                    if(preg_match ('/.{8,50}/', $_POST['password']) == 1){
+                        if($_POST['password'] == $_POST['confirm-password']){
+            
+                            $_SESSION['username'] = $_POST['username'];
+                            $valid = true;
+                            
+                        }
+                        elseif(array_key_exists('password', $_POST)) {
+                            echo ' Les deux mots de passes ne sont pas identiques ';
+                        }
+                    }
+                    else{
+                        echo 'mdp pas assez long';
+                    }
+                }
+    
+                echo ' username enregistré ';
+    
+            }
+        }
+
+        return $valid;
+    }
 
 }
