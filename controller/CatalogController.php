@@ -50,4 +50,23 @@ class CatalogController extends Controller {
 
         return $content;
     }
+
+        /**
+     * Display Contact Action
+     *
+     * @return string
+     */
+    private function detailBookAction() {
+        $catalogRepository = new CatalogRepository();
+        $book = $catalogRepository->findABook(8);
+
+        $view = file_get_contents('view/page/catalog/book.php');
+
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
 }

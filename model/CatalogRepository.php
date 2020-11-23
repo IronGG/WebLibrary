@@ -119,4 +119,23 @@ class CatalogRepository implements Entity {
 
         return $lstCat;
     }
+
+    public function insertBook($livCouverture, $livTitre, $livChapter, $livExtrait, $livResume, $livAuteur, $livEditeur, $livAnnee, $idUtilisateur, $idCategorie)
+    {
+        
+        $queryToUse = "INSERT INTO t_livre values (NULL,'$livCouverture' ,'$livTitre', '$livChapter', '$livExtrait', '$livResume', '$livAuteur', '$livEditeur','$livAnnee',(SELECT idUtilisateur FROM t_utilisateur where utiPseudo = \"$idUtilisateur\"),'$idCategorie')";
+        $req = $this->queryPrepareExecute($queryToUse, 1);
+        echo $queryToUse;
+        $req = $this->unsetData($req);
+    }
+
+    public function findABook($idBook)
+    {
+        $queryToUse = "SELECT * FROM t_categorie  natural join t_livre natural join t_utilisateur where idLivre = $idBook";
+        $req = $this->querySimpleExecute($queryToUse);
+        $book = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $book;
+    }
 }
