@@ -66,8 +66,6 @@
     </form>
 
     <?php
-    echo $_FILES["cover"]["type"];
-    echo $_FILES["extrait"]["type"];
 
     if(isset($_POST['btnSubmit']))
     {
@@ -107,7 +105,14 @@
 
       if($correctData)
       {
+        $sourceIMG = $_FILES["cover"]["tmp_name"];
+        $destinationIMG = "resources/images/" . date("YmdHis") . $_FILES["cover"]["name"];
+        move_uploaded_file($sourceIMG, $destinationIMG);
+        $sourcePDF = $_FILES["extrait"]["tmp_name"];
+        $destinationPDF = "resources/PDF/" . date("YmdHis") . $_FILES["extrait"]["name"];
+        move_uploaded_file($sourcePDF, $destinationPDF);
         echo "Donnée récupérée";
+        $catalogRepository->insertBook(date("YmdHis") . $_FILES["cover"]["name"], $_POST["mangaName"], $_POST["chapter"], date("YmdHis") . $_FILES["extrait"]["name"], $_POST["resume"], $_POST["authorName"], $_POST["editeurName"], $_POST["year"], $_SESSION["username"], $_POST["chooseCate"]);
         
       }
       else
