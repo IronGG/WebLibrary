@@ -10,7 +10,7 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 
-<body <?php if($_SESSION['registerError']) echo 'onload="RegisterError()"'?>>
+<body <?php if(array_key_exists('registerError', $_SESSION)) if($_SESSION['registerError']) echo 'onload="RegisterError()"'?>>
 <script type="text/javascript">
     function RegisterError()
         {
