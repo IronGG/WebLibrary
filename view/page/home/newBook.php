@@ -27,7 +27,7 @@
                       <?php
                         foreach($lstCategories as $category)
                           {
-                            echo '<option value='.$category['idCategorie'].''.((isset($_POST['chooseCate']) && $_POST['chooseCate'] === $category['idCategorie']) ? $_POST['chooseCate'] : '').'>'.$category['catName'].' </option>';
+                            echo '<option value='.$category['idCategory'].''.((isset($_POST['chooseCate']) && $_POST['chooseCate'] === $category['idCategory']) ? $_POST['chooseCate'] : '').'>'.$category['catName'].' </option>';
                           } 
                       ?>
                       </select>

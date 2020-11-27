@@ -66,7 +66,7 @@ class CatalogRepository implements Entity {
      */
     public function findAll() {
 
-        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie";
+        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -79,7 +79,7 @@ class CatalogRepository implements Entity {
 
         $maVar1 = 0; // nombre de départ
         $maVar2i = 5; // nombre de répétition à afficher
-        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie LIMIT $maVar1, $maVar2i";
+        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category LIMIT $maVar1, $maVar2i";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -89,7 +89,7 @@ class CatalogRepository implements Entity {
     }
     public function findAllCat() {
 
-        $queryToUse = "SELECT * FROM t_categorie";
+        $queryToUse = "SELECT * FROM t_category";
         $req = $this->querySimpleExecute($queryToUse);
         $lstCat = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -99,17 +99,17 @@ class CatalogRepository implements Entity {
     }
     public function findSpecialBook($specialCat) {
 
-        $queryToUse = "SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie where ";
+        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category where ";
         $i = 0;
         foreach($specialCat as $oneCat)
         {
             if($i == 0)
             {
-                $queryToUse = $queryToUse . "idCategorie = ". $oneCat;
+                $queryToUse = $queryToUse . "idCategory = ". $oneCat;
             }
             else
             {
-                $queryToUse = $queryToUse . " or idCategorie = ". $oneCat;
+                $queryToUse = $queryToUse . " or idCategory = ". $oneCat;
             }
             $i++;
         }
@@ -120,10 +120,10 @@ class CatalogRepository implements Entity {
         return $lstCat;
     }
 
-    public function insertBook($livCouverture, $livTitre, $livChapter, $livExtrait, $livResume, $livAuteur, $livEditeur, $livAnnee, $idUtilisateur, $idCategorie)
+    public function insertBook($booCover, $booTitle, $livChapter, $booExtract, $booAbstract, $booAuthor, $booEditor, $booYear, $idUser, $idCategory)
     {
         
-        $queryToUse = "INSERT INTO t_livre values (NULL,'$livCouverture' ,'$livTitre', '$livChapter', '$livExtrait', '$livResume', '$livAuteur', '$livEditeur','$livAnnee',(SELECT idUtilisateur FROM t_utilisateur where utiPseudo = \"$idUtilisateur\"),'$idCategorie')";
+        $queryToUse = "INSERT INTO t_book values (NULL,'$booCover' ,'$booTitle', '$livChapter', '$booExtract', '$booAbstract', '$booAuthor', '$booEditor','$booYear',(SELECT idUser FROM t_user where usePseudo = \"$idUser\"),'$idCategory')";
         $req = $this->queryPrepareExecute($queryToUse, 1);
         echo $queryToUse;
         $req = $this->unsetData($req);
@@ -131,7 +131,7 @@ class CatalogRepository implements Entity {
 
     public function findABook($idBook)
     {
-        $queryToUse = "SELECT * FROM t_categorie  natural join t_livre natural join t_utilisateur where idLivre = $idBook";
+        $queryToUse = "SELECT * FROM t_category  natural join t_book natural join t_user where idBook = $idBook";
         $req = $this->querySimpleExecute($queryToUse);
         $book = $this->formatData($req);
         $req = $this->unsetData($req);

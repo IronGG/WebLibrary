@@ -40,7 +40,7 @@ class RegisterRepository implements Entity {
         {
                 die('Erreur : ' . $e->getMessage());
         }
-        $lstCat = $this->bdd->query("SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie");
+        $lstCat = $this->bdd->query("SELECT * FROM t_book natural join t_user natural join t_category");
 
         return $lstCat;
 

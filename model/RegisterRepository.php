@@ -40,7 +40,7 @@ class RegisterRepository implements Entity {
         {
                 die('Erreur : ' . $e->getMessage());
         }
-        $lstCat = $this->bdd->query("SELECT * FROM t_livre natural join t_utilisateur natural join t_categorie");
+        $lstCat = $this->bdd->query("SELECT * FROM t_book natural join t_user natural join t_category");
 
         return $lstCat;
 
@@ -48,7 +48,7 @@ class RegisterRepository implements Entity {
 
     public function register($username, $password) {
 
-        $insertUser = "INSERT INTO t_utilisateur (utiPseudo, utiPassword, utiDate) VALUES ('" . $username . "' , '" . $password . "', CURDATE())";
+        $insertUser = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $password . "', CURDATE())";
 
         if ($this->bdd->query($insertUser) == TRUE) {
             echo "New record created successfully";
@@ -60,7 +60,7 @@ class RegisterRepository implements Entity {
 
     public function login($username) {
 
-        $userList = $this->bdd->query("SELECT * FROM t_utilisateur WHERE utiPseudo = '$username'");
+        $userList = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '$username'");
 
         return $userList;
     }

@@ -68,7 +68,7 @@
             die('Erreur : ' . $e->getMessage());
     }
 
-    $insertUser = "INSERT INTO t_utilisateur (utiPseudo, utiPassword) VALUES ('" . $_SESSION['username'] . "' , '" . $_SESSION['password'] . "' )";
+    $insertUser = "INSERT INTO t_user (usePseudo, usePassword) VALUES ('" . $_SESSION['username'] . "' , '" . $_SESSION['password'] . "' )";
 
     if ($bdd->query($insertUser) == TRUE) {
         echo "New record created successfully";
