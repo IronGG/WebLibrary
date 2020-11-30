@@ -5,6 +5,7 @@
  * Date: 22.01.2019
  * Controler pour gérer les pages classiques
  */
+include_once 'model/VerifInsert.php';
 
 class HomeController extends Controller {
 
@@ -77,8 +78,10 @@ class HomeController extends Controller {
      * @return string
      */
     private function newBookAction() {
+
         $catalogRepository = new CatalogRepository();
         $lstCategories = $catalogRepository->findAllCat();
+        $verifData = new VerifInsert();
 
         $view = file_get_contents('view/page/home/newBook.php');
 
