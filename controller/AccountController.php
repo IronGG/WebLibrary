@@ -17,9 +17,26 @@ class AccountController extends Controller {
      */
     public function display() {
 
+        if(array_key_exists('action', $_GET)){
+            $action = $_GET['action'] . "Action"; // listAction
+        }
+        else{
+            $action = 'indexAction'; // listAction
+        }
+
+        
+        if(method_exists(HomeController::class, $action)){      
+            return call_user_func(array($this, $action));
+        }
+        else{
+            return call_user_func(array($this, "indexAction"));
+        }
+
+        /*
         $action = $_GET['action'] . "Action"; // listAction
 
         return call_user_func(array($this, $action));
+        */
     }
 
     /**

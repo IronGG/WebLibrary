@@ -48,7 +48,8 @@ class RegisterRepository implements Entity {
 
     public function register($username, $password) {
 
-        $insertUser = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $password . "', CURDATE())";
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $insertUser = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $passwordHash . "', CURDATE())";
 
         if ($this->bdd->query($insertUser) == TRUE) {
             echo "New record created successfully";
@@ -85,10 +86,14 @@ class RegisterRepository implements Entity {
     
                     if(preg_match ('/.{8,50}/', $_POST['password']) == 1){
                         if($_POST['password'] == $_POST['confirm-password']){
-            
-                            $_SESSION['username'] = $_POST['username'];
-                            $valid = true;
-                            
+                            //$_SESSION['varcheck'] = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll();
+                            if($this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll() == array() ){
+                                $_SESSION['username'] = $_POST['username'];
+                                $valid = true;
+                            }
+                            else{
+                                $_SESSION['registerErrorUserExists'] = true;
+                            }
                         }
                         elseif(array_key_exists('password', $_POST)) {
                             echo ' Les deux mots de passes ne sont pas identiques ';

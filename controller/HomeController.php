@@ -15,9 +15,23 @@ class HomeController extends Controller {
      */
     public function display() {
 
-        $action = $_GET['action'] . "Action"; // listAction
+        
+        if(array_key_exists('action', $_GET)){
+            $action = $_GET['action'] . "Action"; // listAction
+        }
+        else{
+            $action = 'indexAction'; // listAction
+        }
 
-        return call_user_func(array($this, $action));
+        
+        if(method_exists(get_class($this), $action)){      
+            return call_user_func(array($this, $action));
+        }
+        else{
+            return call_user_func(array($this, "indexAction"));
+        }
+
+        //return call_user_func(array($this, $action));
     }
 
     /**
@@ -67,6 +81,18 @@ class HomeController extends Controller {
         $lstCategories = $catalogRepository->findAllCat();
 
         $view = file_get_contents('view/page/home/newBook.php');
+
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    private function profilAction() {
+
+        $view = file_get_contents('view/page/home/profil.php');
 
 
         ob_start();

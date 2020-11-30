@@ -33,7 +33,7 @@
               .  $_SESSION['username'] . 
               '</button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Mon Profil</a>
+                <a class="dropdown-item" href="index.php?controller=home&action=profil&user=IronG">Mon Profil</a>
                 <a class="dropdown-item" href="#">Paramètres</a>
                 <a class="dropdown-item" href="#">Autre</a>
                 <div class="dropdown-divider"></div>

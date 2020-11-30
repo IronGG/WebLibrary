@@ -1,10 +1,11 @@
 <?php
 
 if(array_key_exists('password', $_POST)){
-    if($_POST['password'] == $compte[0]['usePassword']){
+    if(password_verify($_POST['password'], $compte[0]['usePassword'])){
         if($_POST['password'] && $_POST['username']){
             echo '<h1 class="mt-3 text-center text-success" >VOUS VOUS ETES CONNECTES</h1>';
             $_SESSION['username'] = $compte[0]['usePseudo'];
+            $_SESSION['connected'] = true;
         }
         else{
 
