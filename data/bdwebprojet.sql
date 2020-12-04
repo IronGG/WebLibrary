@@ -102,7 +102,7 @@ CREATE TABLE `t_user` (
   `idUser` int(11) NOT NULL,
   `usePseudo` varchar(50) NOT NULL,
   `useDate` date NOT NULL,
-  `usePassword` varchar(50) NOT NULL
+  `usePassword` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
