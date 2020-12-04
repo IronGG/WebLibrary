@@ -79,7 +79,7 @@ class CatalogRepository implements Entity {
 
         $maVar1 = 0; // nombre de départ
         $maVar2i = 5; // nombre de répétition à afficher
-        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category LIMIT $maVar1, $maVar2i";
+        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category ORDER BY idBook DESC LIMIT $maVar1, $maVar2i";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
