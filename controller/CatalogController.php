@@ -51,7 +51,7 @@ class CatalogController extends Controller {
         return $content;
     }
 
-        /**
+    /**
      * Display Contact Action
      *
      * @return string

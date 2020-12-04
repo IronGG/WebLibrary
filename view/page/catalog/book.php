@@ -14,7 +14,9 @@
             <p>Année de sortie du premier chaptire : <?php echo $book[0]['booYear']?></p>
             <p>Catégorie : <?php echo $book[0]['catName']?></p>
             <p>Livre ajouté par : <?php echo $book[0]['usePseudo']?></p>
-            <a href="resources/images/<?php echo $book[0]['booCover']?>" download="extrait">Télécharger un extrait</a>
+            <p><a href="resources/images/<?php echo $book[0]['booCover']?>" download="extrait">Télécharger un extrait</a></p>
+            <p>Note moyenne du livre</p>
+            <p>Evaluez ici</p>
 
         </div>
       </div>

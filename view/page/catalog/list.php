@@ -26,14 +26,16 @@
     <?php
 
         foreach($books as $book)
-        {
+        {   
         
     ?>
         <div class="col mb-4">
             <div class="card h-100">
                 <img src="resources/images/<?php echo $book['booCover']?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href='index.php?controller=catalog&action=detailBook?idBook="<?php $book["idBook"] ?>"> class="text-decoration-none text-dark'>
+                <?php
+                    echo '<a href="index.php?controller=catalog&action=detailBook&idBook=' . htmlspecialchars($book['idBook']) .'">';
+                    ?>
                         <h6 class="card-title text-center"><?php echo $book['booTitle']?> </h6>
                     </a>
                     <p class="card-text"><small><?php echo "Auteur : " . $book['booAuthor'] ."<br>Catégorie : " .$book['catName'] ."<br>Ajouté par : " . $book['usePseudo']?></small></p>
