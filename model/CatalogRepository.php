@@ -147,4 +147,14 @@ class CatalogRepository{
 
         return $nbBook[0]["count(idbook)"];
     }
+
+    public function SearchEval($idBook)
+    {
+        $queryToUse = "SELECT AVG(evaGrade) as eval FROM t_eval WHERE idBook = $idBook";
+        $req = $this->querySimpleExecute($queryToUse);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]["evaGrade"];
+    }
 }

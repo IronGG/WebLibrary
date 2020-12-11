@@ -16,7 +16,7 @@ if($_SESSION == array()){
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/stylesheet.css">
+    <link rel="stylesheet" href="resources/custom/css/stylesheet.css">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -74,6 +74,7 @@ class CatalogController extends Controller {
     private function detailBookAction() {
         $catalogRepository = new CatalogRepository();
         $book = $catalogRepository->findABook($_GET['idBook']);
+        //$note = $catalogRepository->SearchEval($_GET['idBook']);
 
         $view = file_get_contents('view/page/catalog/book.php');
 
