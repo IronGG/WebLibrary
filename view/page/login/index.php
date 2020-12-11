@@ -82,7 +82,7 @@
 								<form id="register-form" action="index.php?controller=login&action=register" method="post" role="form" style="display: none;">
 								<?php
 								if(array_key_exists('registerError', $_SESSION)){
-									if($_SESSION['registerError'] && $_SESSION['registerErrorUserExists'] == false){
+									if($_SESSION['registerError']){
 										echo '								
 										<div class="text-danger mb-5">
 										<h4>
@@ -95,13 +95,15 @@
 									$_SESSION['registerError'] = false;
 
 									}
+								}
 
+								if(array_key_exists('registerErrorUserExists', $_SESSION)){
 									if($_SESSION['registerErrorUserExists']){
 										echo '								
 										<div class="text-danger mb-5">
 										<h4>
 											<ul>' .
-											  "<li>Utilisateur existe déjà</li>"
+											"<li>Utilisateur existe déjà</li>"
 											. '</ul>
 										</h4>
 									</div>';
