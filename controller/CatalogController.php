@@ -24,12 +24,27 @@ class CatalogController extends Controller {
     }
 
     private function indexAction() {
+        $catalogRepository = new CatalogRepository();
+        $nbBook = $catalogRepository->numberPagePossible();
+        if(!isset($_GET["numberPage"]))
+        {
+            $_GET["numberPage"] = 1;
+        }
+        elseif ($_GET["numberPage"] > 1 + $nbBook/15)
+        {
+            $_GET["numberPage"] = 1;
+        }
+        elseif($_GET["numberPage"]<1)
+        {
+            $_GET["numberPage"] = 1;
+        }
+
         // Instancie le modèle et va chercher les informations
         $catalogRepository = new CatalogRepository();
         $lstCategories = $catalogRepository->findAllCat();
         if(!isset($_POST["catChoose"]))
         {
-            $books = $catalogRepository->findAll();
+            $books = $catalogRepository->findAll($_GET["numberPage"]);
         }
         else
         {
