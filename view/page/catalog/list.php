@@ -6,6 +6,7 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body mb-3">
             <form method="post" name="formStage" action="index.php?controller=catalog&action=index">
+            <h4 class="text-center mb-3">Catégories :</h4>
                 <div class="row">
                     <?php
                     foreach ($lstCategories as $category) {
