@@ -6,9 +6,7 @@
  * Recueil des méthodes permettant de charger les données pour les clients
  */
 
-include_once 'Entity.php';
-
-class CatalogRepository implements Entity {
+class CatalogRepository{
 
     // Variable de classe
     private $connector;
@@ -64,9 +62,10 @@ class CatalogRepository implements Entity {
      *
      * @return array
      */
-    public function findAll() {
+    public function findAll($numberPage) {
+        $numberPage = ($numberPage -1) * 15;
 
-        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category";
+        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category limit $numberPage, 15";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -137,5 +136,15 @@ class CatalogRepository implements Entity {
         $req = $this->unsetData($req);
 
         return $book;
+    }
+
+    public function numberPagePossible()
+    {
+        $queryToUse = "Select count(idbook) from t_book";
+        $req = $this->querySimpleExecute($queryToUse);
+        $nbBook = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $nbBook[0]["count(idbook)"];
     }
 }
