@@ -79,11 +79,30 @@ class HomeController extends Controller {
      */
     private function newBookAction() {
 
-        $catalogRepository = new CatalogRepository();
-        $lstCategories = $catalogRepository->findAllCat();
-        $verifData = new VerifInsert();
+        if (!isset($_SESSION['username']))
+        {
+            header("Location: index.php?controller=home&action=unConnected");
+        }
+        else
+        {
+            $catalogRepository = new CatalogRepository();
+            $lstCategories = $catalogRepository->findAllCat();
+            $verifData = new VerifInsert();
 
-        $view = file_get_contents('view/page/home/newBook.php');
+            $view = file_get_contents('view/page/home/newBook.php');
+
+
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
+
+            return $content;
+        }
+    }
+
+    private function profilAction() {
+
+        $view = file_get_contents('view/page/home/profil.php');
 
 
         ob_start();
@@ -93,9 +112,9 @@ class HomeController extends Controller {
         return $content;
     }
 
-    private function profilAction() {
+    private function unConnectedAction() {
 
-        $view = file_get_contents('view/page/home/profil.php');
+        $view = file_get_contents('view/page/home/unConnected.php');
 
 
         ob_start();

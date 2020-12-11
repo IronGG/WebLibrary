@@ -6,6 +6,7 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body mb-3">
             <form method="post" name="formStage" action="index.php?controller=catalog&action=index">
+            <h4 class="text-center mb-3">Catégories :</h4>
                 <div class="row">
                     <?php
                     foreach ($lstCategories as $category) {
@@ -29,9 +30,7 @@
                 <div class="card h-100">
                     <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <?php
-                        echo '<a href="index.php?controller=catalog&action=detailBook&idBook=' . htmlspecialchars($book['idBook']) . '">';
-                        ?>
+                        <a href="index.php?controller=catalog&action=detailBook&idBook='<?php echo htmlspecialchars($book['idBook']) ?>'">
                         <h6 class="card-title text-center"><?php echo $book['booTitle'] ?> </h6>
                         </a>
                         <p class="card-text"><small><?php echo "Auteur : " . $book['booAuthor'] . "<br>Catégorie : " . $book['catName'] . "<br>Ajouté par : " . $book['usePseudo'] ?></small></p>
@@ -56,7 +55,7 @@
             echo '<li class="page-item"><a class="page-link" href="index.php?controller=catalog&action=index&numberPage='. ($_GET["numberPage"] + 1) .'">Suivant</a></li>';
         }
         echo '</ul>';
-        echo '</nav></div>';
+    echo '</nav></div>';
     }
 ?>
 </div>
