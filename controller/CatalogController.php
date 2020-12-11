@@ -72,16 +72,23 @@ class CatalogController extends Controller {
      * @return string
      */
     private function detailBookAction() {
-        $catalogRepository = new CatalogRepository();
-        $book = $catalogRepository->findABook($_GET['idBook']);
+        if (!isset($_SESSION['username']))
+        {
+            header("Location: index.php?controller=home&action=unConnected");
+        }
+        else
+        {
+            $catalogRepository = new CatalogRepository();
+            $book = $catalogRepository->findABook($_GET['idBook']);
 
-        $view = file_get_contents('view/page/catalog/book.php');
+            $view = file_get_contents('view/page/catalog/book.php');
 
 
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
 
-        return $content;
+            return $content;
+        }
     }
 }
