@@ -1,6 +1,12 @@
-<div class="container-xl">
-    <div class="row row-cols-1 row-cols-md-5">
-    <?php
+<?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Affichage des livres de la page d'accueil
+ */
+echo '<div class="container-xl">';
+    echo '<div class="row row-cols-1 row-cols-md-5">';
 
         //while ($book = $books->fetch())
         foreach($books as $book)

@@ -1,4 +1,11 @@
-<!-- Site footer -->
+<?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : footer
+ */  
+?>
 <footer class="footer mt-5">
     <div class="container-fluid bg-dark py-5">
         <div class="d-flex justify-content-around text-light">

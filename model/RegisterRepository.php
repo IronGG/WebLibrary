@@ -1,10 +1,11 @@
 <?php
 /**
  * ETML
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Recueil des méthodes permettant de charger les données pour les clients
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Méthode pour afficher/changer les informations des utilisateurs
  */
+
 
 include_once 'Entity.php';
 

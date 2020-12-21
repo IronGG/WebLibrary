@@ -1,3 +1,8 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page d'acuueil du Site Web -->
 <div>
     <h1 class="text-center mt-5">Hello, world!</h1>
     <h5 class="text-center">Bienvenue sur le site web *******.</h2>

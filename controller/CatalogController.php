@@ -1,9 +1,9 @@
 <?php
 /**
  * ETML
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Controler pour gérer les clients
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Contrôleur pour la liste des livres et le détail
  */
 
 include_once 'model/CatalogRepository.php';
@@ -23,6 +23,12 @@ class CatalogController extends Controller {
         return call_user_func(array($this, $action));
     }
 
+
+    /**
+     * Affichage de la page list, le catalogue
+     *
+     * @return mixed
+     */
     private function indexAction() {
         $catalogRepository = new CatalogRepository();
         $nbBook = $catalogRepository->numberPagePossible();
@@ -67,9 +73,9 @@ class CatalogController extends Controller {
     }
 
     /**
-     * Display Contact Action
+     * Affichage du détail d'un livre
      *
-     * @return string
+     * @return mixed
      */
     private function detailBookAction() {
         //Adrian

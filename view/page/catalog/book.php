@@ -1,3 +1,9 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page de détail d'un livre -->
+
 <meta charset="UTF-8"/>
     <title>Krajee JQuery Plugins - &copy; Kartik</title>
     <!--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">-->

@@ -1,3 +1,8 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page pour la connexion -->
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="resources/custom/css/loginStyles.css" rel="stylesheet" id="bootstrap-css">

@@ -1,8 +1,9 @@
 <?php
 /**
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Interface regroupant les méthodes à avoir dans chaque repository
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Classe parent contentant les méthodes de base pour les repository
  */
 
 interface Entity {

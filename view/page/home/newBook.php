@@ -1,3 +1,9 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page d'ajout d'un nouveau livre-->
+
 <form method="post" name="addBook" action="index.php?controller=home&action=newBook" enctype="multipart/form-data">
 
   <div class="container-xl px-5">

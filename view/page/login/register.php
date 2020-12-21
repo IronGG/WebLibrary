@@ -1,4 +1,10 @@
 <?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description :
+ */  
 
 if(isset($_SESSION['username'])){
     header("Location: index.php?controller=home&action=index");

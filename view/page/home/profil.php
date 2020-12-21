@@ -1,3 +1,8 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page du profil d'un utilisateur -->
 <div class="row py-5 px-4">
     <div class="col-md-5 mx-auto">
         <!-- Profile widget -->

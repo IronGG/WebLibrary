@@ -1,4 +1,10 @@
 <?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : vérification des donnée entrée pour l'inscription
+ */  
 
 if(array_key_exists('password', $_POST)){
     if(password_verify($_POST['password'], $compte[0]['usePassword'])){

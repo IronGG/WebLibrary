@@ -1,4 +1,11 @@
 <?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Classe vérifiant les données entrées pour un livre
+ */
+
 
 include_once 'CatalogRepository.php';
 class VerifInsert

@@ -2,10 +2,10 @@
 session_start();
 /**
  * ETML
- * Auteur :  Cindy Hardegger
- * Date: 22.01.2019
- * Site web en MVC et orienté objet
- */
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : index
+ */  
 
 $debug = false;
 

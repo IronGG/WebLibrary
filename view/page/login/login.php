@@ -1,5 +1,10 @@
 <?php
-    
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : vérification des donnée entrée pour l'inscription
+ */  
     if(array_key_exists('username', $_POST)) {
         if(preg_match ('/.{1,50}/', $_POST['username']) == 1){  
 

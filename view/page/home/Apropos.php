@@ -1,3 +1,8 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page a propos contenant des informations sur le projet -->
 <h1 class="text-center mt-5 mb-5">A propos</h1>
 
 <h2 class="text-center mt-5">Description générale du site.</h2>

@@ -1,16 +1,16 @@
 <?php
 /**
  * ETML
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Controler pour gérer les pages classiques
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Contrôleur pour les pages classiques
  */
 include_once 'model/VerifInsert.php';
 
 class HomeController extends Controller {
 
     /**
-     * Dispatch current action
+     * Permet de choisir l'action a effectuer
      *
      * @return mixed
      */

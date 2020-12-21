@@ -1,5 +1,12 @@
-<?php 
-    //session_start(); // Démarrer le système de session  
+<?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : head
+ */
+
+ //session_start(); // Démarrer le système de session  
     
 /*
 if($_SESSION == array()){

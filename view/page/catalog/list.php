@@ -1,3 +1,8 @@
+<!--
+  ETML
+  Auteur : Laetitia Guidetti et Adrian Barreira
+  Date: Septembre à Décembre 2020
+  Description : Page du catalogue contenant tout les livres -->
 <div class="container-xl">
     <h1 class="text-left mt-5 mb-3">Catalogue</h1>
     <p>
