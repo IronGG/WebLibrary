@@ -6,19 +6,14 @@
  * Description : Méthode pour afficher/changer les informations des utilisateurs
  */
 
-
-include_once 'Entity.php';
-
-class RegisterRepository implements Entity {
-
-    private $bdd;
+include_once "Repository.php";
+class RegisterRepository extends Repository{
 
     public function __construct()
     {
-        // SQL stuff
         try
         {
-            $this->bdd = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
+            $this->connector = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
         }
         catch (Exception $e)
         {
@@ -26,43 +21,24 @@ class RegisterRepository implements Entity {
         }
     }
     
-    /**
-     * Récupérer tous les clients
-     *
-     * @return array
-     */
-    public function findAll() {
-
-        try
-        {
-            $this->bdd = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
-        }
-        catch (Exception $e)
-        {
-                die('Erreur : ' . $e->getMessage());
-        }
-        $lstCat = $this->bdd->query("SELECT * FROM t_book natural join t_user natural join t_category");
-
-        return $lstCat;
-
-    }
 
     public function register($username, $password) {
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $insertUser = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $passwordHash . "', CURDATE())";
+        $queryToUse = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $passwordHash . "', CURDATE())";
 
-        if ($this->bdd->query($insertUser) == TRUE) {
+        if ($this->querySimpleExecute($queryToUse) == TRUE) {
             echo "New record created successfully";
         } 
         else {  
-            echo "Error: " . $insertUser . "<br>";
+            echo "Error: " . $queryToUse . "<br>";
         }
     }
 
     public function login($username) {
 
-        $userList = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '$username'");
+        $queryToUse = "SELECT * FROM t_user WHERE usePseudo = '$username'";
+        $userList = $this->querySimpleExecute($queryToUse);
 
         return $userList;
     }
@@ -88,7 +64,7 @@ class RegisterRepository implements Entity {
                     if(preg_match ('/.{8,50}/', $_POST['password']) == 1){
                         if($_POST['password'] == $_POST['confirm-password']){
                             //$_SESSION['varcheck'] = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll();
-                            if($this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll() == array() ){
+                            if($this->querySimpleExecute("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll() == array() ){
                                 $_SESSION['username'] = $_POST['username'];
                                 $valid = true;
                             }

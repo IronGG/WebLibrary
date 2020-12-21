@@ -12,7 +12,6 @@
 
 
 <script src="resources/javascript.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 </head>
 
 <body <?php if(array_key_exists('registerError', $_SESSION)) if($_SESSION['registerError']) echo 'onload="RegisterError()"'?>>

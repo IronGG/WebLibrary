@@ -22,6 +22,7 @@ Il a été realisé dans le cadre d'un projet qui s'est étendu sur 6 mois duran
     </div>
     <div class="row row-cols-1 row-cols-md-2 text-center">
         <div class="col mb-5">
+        <!-- Adrian -->
             <div>
                 <h3>Adrian Barreira Romero</h3>
                 <div class="card-body">
@@ -31,6 +32,7 @@ Il a été realisé dans le cadre d'un projet qui s'est étendu sur 6 mois duran
             </div>
         </div>
         <div class="col mb-5">
+        <!-- Laetiti -->
             <div>
                 <h3>Laetitia Guidetti</h3>
                 <div class="card-body">

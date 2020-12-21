@@ -14,6 +14,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="resources/bootstrap/star-rating/js/star-rating.js" type="text/javascript"></script>
 
+<!-- Détail d'un livre -->
 <div class="container-xl px-5">
     <h1 class="text-left mt-5 mb-5"><?php echo $book[0]['booTitle']?></h1>
     <div class="row row-cols-1 row-cols-md-5">
@@ -29,7 +30,8 @@
             <p>Année de sortie du premier chaptire : <?php echo $book[0]['booYear']?></p>
             <p>Catégorie : <?php echo $book[0]['catName']?></p>
             <p>Livre ajouté par : <?php echo $book[0]['usePseudo']?></p>
-            <p><a href="resources/images/<?php echo $book[0]['booCover']?>" download="extrait">Télécharger un extrait</a></p>
+            <!-- Téléchargement d'un extrait -->
+            <p><a href="resources/PDF/<?php echo $book[0]['booExtract']?>" download="extrait">Télécharger un extrait</a></p>
             <p>Note moyenne du livre</p>
             <p>Evaluez ici</p>
 

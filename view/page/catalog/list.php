@@ -8,12 +8,14 @@
     <p>
         <button class="btn btn-primary btn-light border" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filtrer</button>
     </p>
+    <!-- Filtre des catégories -->
     <div class="collapse" id="collapseExample">
         <div class="card card-body mb-3">
             <form method="post" name="formStage" action="index.php?controller=catalog&action=index">
             <h4 class="text-center mb-3">Catégories :</h4>
                 <div class="row">
                     <?php
+                    // Checkbox de toutes les catégories
                     foreach ($lstCategories as $category) {
                         echo '<div class="col-4 text-center">';
                         echo '<p class="lead"><input type="checkbox" name="catChoose[]" value=' . $category["idCategory"] . '> ' . $category["catName"] . '</p>';
@@ -27,6 +29,7 @@
             </form>
         </div>
     </div>
+    <!-- Affichage des livres -->
     <div class="row row-cols-1 row-cols-md-5">
         <?php
         foreach ($books as $book) {
@@ -46,6 +49,7 @@
         }
         
     echo "</div>";
+    // Système changement de pages
     if(!isset($_POST["catChoose"]))
     {
         echo '<div class="d-flex justify-content-center"><nav>';

@@ -36,7 +36,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * Display Index Action
+     * Affichage de l'index
      *
      * @return string
      */
@@ -56,7 +56,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * Display Contact Action
+     * Affichage de la page A propos
      *
      * @return string
      */
@@ -73,7 +73,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * Display Contact Action
+     * Affichage de la page d'insertion d'un nouveau livre
      *
      * @return string
      */
@@ -100,6 +100,11 @@ class HomeController extends Controller {
         }
     }
 
+    /**
+     * Affichage du profil d'un utilisateur
+     *
+     * @return void
+     */
     private function profilAction() {
 
         $view = file_get_contents('view/page/home/profil.php');
@@ -112,6 +117,11 @@ class HomeController extends Controller {
         return $content;
     }
 
+    /**
+     * Affichage de la page de non connexion
+     *
+     * @return void
+     */
     private function unConnectedAction() {
 
         $view = file_get_contents('view/page/home/unConnected.php');

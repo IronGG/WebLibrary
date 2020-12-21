@@ -7,11 +7,10 @@
  */
 echo '<div class="container-xl">';
     echo '<div class="row row-cols-1 row-cols-md-5">';
-
-        //while ($book = $books->fetch())
+    
+// Affichage des 5 livres
         foreach($books as $book)
-        {
-        
+        {   
     ?>
         <div class="col mb-4">
             <div class="card h-100">
