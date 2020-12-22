@@ -118,9 +118,60 @@ class CatalogRepository extends Repository{
     public function insertBook($booCover, $booTitle, $livChapter, $booExtract, $booAbstract, $booAuthor, $booEditor, $booYear, $idUser, $idCategory)
     {
         
-        $queryToUse = "INSERT INTO t_book values (NULL,'$booCover' ,'$booTitle', '$livChapter', '$booExtract', '$booAbstract', '$booAuthor', '$booEditor','$booYear',(SELECT idUser FROM t_user where usePseudo = \"$idUser\"),'$idCategory')";
-        $req = $this->queryPrepareExecute($queryToUse, 1);
-        echo $queryToUse;
+        $queryToUse = "INSERT INTO t_book values (NULL, :booCover, :booTitle, :livChapter, :booExtract, :booAbstract, :booAuthor, :booEditor, :booYear,(SELECT idUser FROM t_user where usePseudo = :idUser), :idCategory)";
+        $values = array(
+            1=> array(
+                'marker' => ':booCover',
+                'var' => $booCover,
+                'type' => PDO::PARAM_STR
+            ),
+            2=> array(
+                'marker' => ':booTitle',
+                'var' => $booTitle,
+                'type' => PDO::PARAM_STR
+            ),
+            3=> array(
+                'marker' => ':livChapter',
+                'var' => $livChapter,
+                'type' => PDO::PARAM_STR
+            ),
+            4=> array(
+                'marker' => ':booExtract',
+                'var' => $booExtract,
+                'type' => PDO::PARAM_STR
+            ),
+            5=> array(
+                'marker' => ':booAbstract',
+                'var' => $booAbstract,
+                'type' => PDO::PARAM_STR
+            ),
+            6=> array(
+                'marker' => ':booAuthor',
+                'var' => $booAuthor,
+                'type' => PDO::PARAM_STR
+            ),
+            7=> array(
+                'marker' => ':booEditor',
+                'var' => $booEditor,
+                'type' => PDO::PARAM_STR
+            ),
+            8=> array(
+                'marker' => ':booYear',
+                'var' => $booYear,
+                'type' => PDO::PARAM_INT
+            ),
+            9=> array(
+                'marker' => ':idUser',
+                'var' => $idUser,
+                'type' => PDO::PARAM_INT
+            ),
+            10=> array(
+                'marker' => ':idCategory',
+                'var' => $idCategory,
+                'type' => PDO::PARAM_INT
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
         $req = $this->unsetData($req);
     }
 

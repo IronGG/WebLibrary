@@ -64,7 +64,7 @@ class VerifInsert
     }
 
     // Verifie qu'un extrait soit données
-    if ($_FILES["extrait"]["type"] != "application/pdf") {
+    if ($_FILES["extrait"]["type"] != "application/pdf" && $_FILES["extrait"] == NULL) {
       $_SESSION["Error"][] = "L'extrait doit être au format pdf";
       $correctData = FALSE;
     }
@@ -77,7 +77,7 @@ class VerifInsert
       $sourcePDF = $_FILES["extrait"]["tmp_name"];
       $destinationPDF = "resources/PDF/" . date("YmdHis") . $_FILES["extrait"]["name"];
       move_uploaded_file($sourcePDF, $destinationPDF);
-      $catalogRepository->insertBook(date("YmdHis") . $_FILES["cover"]["name"], $_POST["mangaName"], $_POST["chapter"], date("YmdHis") . $_FILES["extrait"]["name"], $_POST["resume"], $_POST["authorName"], $_POST["editeurName"], $_POST["year"], $_SESSION["username"], $_POST["chooseCate"]);
+      $catalogRepository->insertBook(date("YmdHis") . $_FILES["cover"]["name"], $_POST["mangaName"], $_POST["chapter"],"test", $_POST["resume"], $_POST["authorName"], $_POST["editeurName"], $_POST["year"], $_SESSION["username"], $_POST["chooseCate"]);
       header("Location: index.php?controller=home&action=index");
     }
   }

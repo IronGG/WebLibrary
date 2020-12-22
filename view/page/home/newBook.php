@@ -69,12 +69,12 @@
           <div class="col-3 form-group px-4">
           <!-- Date de sortie -->
             <label for="year">Date de sortie</label>
-            <input type="number" class="form-control" id="year" name="year" min=1900 max=<?php echo date("Y"); ?> value="<?php echo isset($_POST['year']) ? $_POST['year'] : '' ?>">
+            <input type="number" class="form-control" id="year" name="year" min=1900 max=<?php echo date("Y"); ?> value="<?php echo isset($_POST['year']) ? $_POST['year'] : 1900 ?>">
           </div>
           <div class="col-3 form-group px-4">
           <!-- Nombre de chapitre -->
             <label for="chapter">NB chapitres</label>
-            <input type="number" class="form-control" id="chapter" name="chapter" min=1 value="<?php echo isset($_POST['chapter']) ? $_POST['chapter'] : '' ?>">
+            <input type="number" class="form-control" id="chapter" name="chapter" min=1 value="<?php echo isset($_POST['chapter']) ? $_POST['chapter'] : 1 ?>">
           </div>
         </div>
         <div class="row">

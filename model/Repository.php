@@ -34,7 +34,12 @@ abstract class Repository{
     protected function queryPrepareExecute($query, $binds)
     {
         $req = $this->connector->prepare($query);
+        foreach($binds as $bind)
+        {
+            $req->bindValue($bind['marker'], $bind['var'], $bind['type']);
+        }
         $req->execute();
+
         return $req;
     }
 
