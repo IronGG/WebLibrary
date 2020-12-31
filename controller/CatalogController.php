@@ -32,38 +32,32 @@ class CatalogController extends Controller {
     private function indexAction() {
         $catalogRepository = new CatalogRepository();
         $nbBook = $catalogRepository->numberPagePossible();
-        if(!isset($_GET["numberPage"]))
+        if((!isset($_GET["numberPage"]) || $_GET["numberPage"] > 1 + $nbBook/15 || $_GET["numberPage"]<1) && !isset($_POST["catChoose"]))
         {
-            $_GET["numberPage"] = 1;
-        }
-        elseif ($_GET["numberPage"] > 1 + $nbBook/15)
-        {
-            $_GET["numberPage"] = 1;
-        }
-        elseif($_GET["numberPage"]<1)
-        {
-            $_GET["numberPage"] = 1;
-        }
-
-        // Instancie le modèle et va chercher les informations
-        $catalogRepository = new CatalogRepository();
-        $lstCategories = $catalogRepository->findAllCat();
-        if(!isset($_POST["catChoose"]))
-        {
-            $books = $catalogRepository->findAll($_GET["numberPage"]);
+            header("Location: index.php?controller=catalog&action=index&numberPage=1");
         }
         else
         {
-            $books = $catalogRepository->findSpecialBook($_POST["catChoose"]);
+            // Instancie le modèle et va chercher les informations
+            $catalogRepository = new CatalogRepository();
+            $lstCategories = $catalogRepository->findAllCat();
+            if(!isset($_POST["catChoose"]))
+            {
+                $books = $catalogRepository->findAll($_GET["numberPage"]);
+            }
+            else
+            {
+                $books = $catalogRepository->findSpecialBook($_POST["catChoose"]);
+            }
+
+            $view = file_get_contents('view/page/catalog/list.php');
+
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
+
+            return $content;
         }
-
-        $view = file_get_contents('view/page/catalog/list.php');
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
     }
 
     /**
@@ -72,9 +66,6 @@ class CatalogController extends Controller {
      * @return mixed
      */
     private function detailBookAction() {
-        //Adrian
-        $catalogRepository = new CatalogRepository();
-        $book = $catalogRepository->findABook($_GET['idBook']);
         //$note = $catalogRepository->SearchEval($_GET['idBook']);
         
         //Laetitia

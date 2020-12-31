@@ -28,7 +28,7 @@ class CatalogRepository extends Repository{
     public function findAll($numberPage) {
         $numberPage = ($numberPage -1) * 15;
 
-        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category limit $numberPage, 15";
+        $queryToUse = "SELECT idBook, booCover, booAuthor, booTitle, catName, usePseudo FROM t_book natural join t_user natural join t_category limit $numberPage, 15";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -46,7 +46,7 @@ class CatalogRepository extends Repository{
 
         $maVar1 = 0; // nombre de départ
         $maVar2i = 5; // nombre de répétition à afficher
-        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category ORDER BY idBook DESC LIMIT $maVar1, $maVar2i";
+        $queryToUse = "SELECT idBook, booCover, booAuthor, booTitle, catName, usePseudo FROM t_book natural join t_user natural join t_category ORDER BY idBook DESC LIMIT $maVar1, $maVar2i";
         $req = $this->querySimpleExecute($queryToUse);
         $books = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -62,7 +62,7 @@ class CatalogRepository extends Repository{
      */
     public function findAllCat() {
 
-        $queryToUse = "SELECT * FROM t_category";
+        $queryToUse = "SELECT idCategory, catName FROM t_category";
         $req = $this->querySimpleExecute($queryToUse);
         $lstCat = $this->formatData($req);
         $req = $this->unsetData($req);
@@ -79,7 +79,7 @@ class CatalogRepository extends Repository{
      */
     public function findSpecialBook($specialCat) {
 
-        $queryToUse = "SELECT * FROM t_book natural join t_user natural join t_category where ";
+        $queryToUse = "SELECT idBook, booCover, booAuthor, booTitle, catName, usePseudo FROM t_book natural join t_user natural join t_category where ";
         $i = 0;
         foreach($specialCat as $oneCat)
         {
@@ -183,8 +183,15 @@ class CatalogRepository extends Repository{
      */
     public function findABook($idBook)
     {
-        $queryToUse = "SELECT * FROM t_category  natural join t_book natural join t_user where idBook = $idBook";
-        $req = $this->querySimpleExecute($queryToUse);
+        $queryToUse = "SELECT idBook, booCover, booAuthor, booTitle, catName, usePseudo, booEditor, booChapter, booYear, booExtract, booAbstract FROM t_category  natural join t_book natural join t_user WHERE idBook = :idBook limit 1";
+        $values = array(
+            1=> array(
+                'marker' => ':idBook',
+                'var' => $idBook,
+                'type' => PDO::PARAM_INT
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
         $book = $this->formatData($req);
         $req = $this->unsetData($req);
 
@@ -214,8 +221,15 @@ class CatalogRepository extends Repository{
      */
     public function SearchEval($idBook)
     {
-        $queryToUse = "SELECT AVG(evaGrade) as eval FROM t_eval WHERE idBook = $idBook";
-        $req = $this->querySimpleExecute($queryToUse);
+        $queryToUse = "SELECT AVG(evaGrade) as eval FROM t_eval WHERE idBook = :idBook";
+        $values = array(
+            1=> array(
+                'marker' => ':idBook',
+                'var' => $idBook,
+                'type' => PDO::PARAM_INT
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
         $eval = $this->formatData($req);
         $req = $this->unsetData($req);
 
