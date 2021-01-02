@@ -221,7 +221,7 @@ class CatalogRepository extends Repository{
      */
     public function SearchEval($idBook)
     {
-        $queryToUse = "SELECT AVG(evaGrade) as eval FROM t_eval WHERE idBook = :idBook";
+        $queryToUse = "SELECT AVG(evaGrade) as eval FROM t_evaluate WHERE idBook = :idBook";
         $values = array(
             1=> array(
                 'marker' => ':idBook',
@@ -233,6 +233,163 @@ class CatalogRepository extends Repository{
         $eval = $this->formatData($req);
         $req = $this->unsetData($req);
 
-        return $eval[0]["evaGrade"];
+        /*if(!($eval != null))
+        var_dump($eval);*/
+
+        //return $eval;
+
+        return $eval[0]["eval"];
+    }
+
+    /**
+     * Insère l'évaluation pour un livre
+     *
+     * @param int $idBook
+     * @return int
+     */
+    public function InsertEval()
+    {
+        $registerRepository = new RegisterRepository();
+        $accountId = $registerRepository->findUserId($_SESSION['username']);
+
+        $queryToUse = "INSERT INTO t_evaluate VALUES (:idUser, :idBook, :evaGrade)";
+        $values = array(
+            1=> array(
+                'marker' => ':idUser',
+                'var' => $accountId,
+                'type' => PDO::PARAM_INT
+            ),
+            2=> array(
+                'marker' => ':idBook',
+                'var' => $_GET['idBook'],
+                'type' => PDO::PARAM_INT
+            ),
+            3=> array(
+                'marker' => ':evaGrade',
+                'var' => $_POST['eval'],
+                'type' => PDO::PARAM_INT
+            )
+        );
+
+        if($values[3]['var'] < 1){
+            $values[3]['var'] = '1';
+        }
+    
+        
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+
+    }
+
+    // nombre des votes DONE
+    public function NumberOfVotes() {
+
+        $queryToUse = "SELECT COUNT(idBook) AS nbVotes FROM t_evaluate WHERE idBook = :id";
+
+        $values = array(
+            1=> array(
+                'marker' => ':id',
+                'var' => $_GET['idBook'],
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]['nbVotes'];
+
+    }
+
+    // stars already inserted (optional)
+    public function AlreadyVoted() {
+
+        $queryToUse = "SELECT idUser FROM t_user WHERE usePseudo = :username";
+
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $_SESSION['username'],
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]['idUser'];
+
+    }
+
+    // Modification Of Vote
+    public function VoteModify() {
+        $queryToUse = "UPDATE t_evaluate SET evaGrade = :eval WHERE idUser = :idUser AND idBook = :idBook";
+
+        $registerRepository = new RegisterRepository();
+        $accountId = $registerRepository->findUserId($_SESSION['username']);
+
+        $values = array(
+            1=> array(
+                'marker' => ':eval',
+                'var' => $_POST['eval'],
+                'type' => PDO::PARAM_INT
+            ),
+            2=> array(
+                'marker' => ':idUser',
+                'var' => $accountId,
+                'type' => PDO::PARAM_INT
+            ),
+            3=> array(
+                'marker' => ':idBook',
+                'var' => $_GET['idBook'],
+                'type' => PDO::PARAM_INT
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $req = $this->unsetData($req);
+
+
+    }
+
+    /**
+     * Retourne l'évaluation d'un utilisateur si un vote existe pour le livre
+     *
+     * @param int $idBook
+     * @return int
+     */
+    public function SearchUserEval()
+    {
+        $registerRepository = new RegisterRepository();
+        $accountId = $registerRepository->findUserId($_SESSION['username']);
+
+        $queryToUse = "SELECT evaGrade FROM t_evaluate WHERE idBook = :idBook AND idUser = :idUser";
+        $values = array(
+            1=> array(
+                'marker' => ':idUser',
+                'var' => $accountId,
+                'type' => PDO::PARAM_INT
+            ),
+            2=> array(
+                'marker' => ':idBook',
+                'var' => $_GET['idBook'],
+                'type' => PDO::PARAM_INT
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        /*if(!($eval != null))
+        var_dump($eval);*/
+
+        //return $eval;
+        if(array_key_exists(0, $eval)){
+            if(array_key_exists('evaGrade', $eval[0])){
+                return $eval[0]["evaGrade"];
+            }
+        }
     }
 }

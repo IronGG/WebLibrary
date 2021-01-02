@@ -41,7 +41,7 @@
                         <a href="index.php?controller=catalog&action=detailBook&idBook=<?php echo htmlspecialchars($book['idBook']) ?>">
                         <h6 class="card-title text-center"><?php echo $book['booTitle'] ?> </h6>
                         </a>
-                        <p class="card-text"><small><?php echo "Auteur : " . $book['booAuthor'] . "<br>Catégorie : " . $book['catName'] . "<br>Ajouté par : " . $book['usePseudo'] ?></small></p>
+                        <p class="card-text"><small><?php echo "Auteur : " . $book['booAuthor'] . "<br>Catégorie : " . $book['catName'] . "<br>Ajouté par : " . '<a href="index.php?controller=home&action=profil&user=' . $book['usePseudo'] .'">' . $book['usePseudo'] . '</a>'; ?></small></p>
                     </div>
                 </div>
             </div>

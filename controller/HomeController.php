@@ -107,6 +107,13 @@ class HomeController extends Controller {
      */
     private function profilAction() {
 
+        $registerRepository = new RegisterRepository();
+        $nbOfVotes = $registerRepository->ProfileNumberOfVotes($_GET['user']);
+
+        $date = $registerRepository->CreationDate();
+
+        $user = $_GET['user'];
+
         $view = file_get_contents('view/page/home/profil.php');
 
 

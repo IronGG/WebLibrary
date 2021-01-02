@@ -89,4 +89,70 @@ class RegisterRepository extends Repository{
         return $valid;
     }
 
+    // DONE
+    public function findUserId($username) {
+
+        $queryToUse = "SELECT idUser FROM t_user WHERE usePseudo = :username";
+
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $username,
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]['idUser'];
+
+    }
+
+
+    // date de création Done
+    public function CreationDate() {
+
+        $queryToUse = "SELECT useDate FROM t_user WHERE usePseudo = :username";
+
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $_GET['user'],
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]['useDate'];
+
+    }
+
+    // nombre de votes Done
+    public function ProfileNumberOfVotes($pseudo) {
+
+        $id = $this->findUserId($pseudo);
+
+        $queryToUse = "SELECT COUNT(idUser) AS votes FROM t_evaluate WHERE idUser = :id";
+
+        $values = array(
+            1=> array(
+                'marker' => ':id',
+                'var' => $id,
+                'type' => PDO::PARAM_STR
+            )
+        );
+
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $eval = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $eval[0]['votes'];
+
+    }
+
 }

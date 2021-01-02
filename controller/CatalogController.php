@@ -66,8 +66,43 @@ class CatalogController extends Controller {
      * @return mixed
      */
     private function detailBookAction() {
-        //$note = $catalogRepository->SearchEval($_GET['idBook']);
+        $catalogRepository = new CatalogRepository();
+        $note = $catalogRepository->SearchEval($_GET['idBook']);
+/*
+        // si une évaluation a été soumise, insertion dans la bd
+        if(array_key_exists('eval', $_POST)){
+            if($_POST['eval'] !=)
+            $userEval = $catalogRepository->InsertEval();
+        }*/
+
+        // affichage des moyennes vides
+        if($note == null){
+            $note = '-';
+        }
+
+        $nbOfVotes = $catalogRepository->NumberOfVotes();
+
+        // Contrôle de la taille des nombres des moyennes -> max 4 charactères
+        if(strlen($note) > 4){
+            $note = substr($note, 0, 4); 
+        }
         
+        //Recherche d'une éventuelle évaluation de l'utilisateur
+        $userEval = $catalogRepository->SearchUserEval();
+
+        // si une évaluation a été soumise, insertion dans la bd
+        if(array_key_exists('eval', $_POST)){
+            if($userEval == null){
+                $userEval = $catalogRepository->InsertEval();
+            }
+            else{
+                $catalogRepository->VoteModify();
+            }
+            // ATTENTION, CECI EST MOCHE, VRAIMENT PAS BEAU, IL SERT A CORRIGER UN BUG NON IDENTIFIE. (le bug est que la moyenne ne se mets pas a jour lors de la première actualisation a cause d'une cause inconnue, RIP)
+            $_POST = array();
+            Header('Location: index.php?controller=catalog&action=detailBook&idBook=' . $_GET['idBook']);
+        }
+
         //Laetitia
         if (!isset($_SESSION['username']))
         {

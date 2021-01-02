@@ -213,10 +213,10 @@
                 $clr.attr({"title": self.clearButtonTitle}).html(self.clearButton);
                 self.$clear = $clr;
                 return;
-            }
+            }/* A voir si nous gardons le clear button
             self._addContent('clear',
                 '<div class="' + css + '" title="' + self.clearButtonTitle + '">' + self.clearButton + '</div>');
-            self.$clear = self.$container.find('.' + self.clearButtonBaseClass);
+            self.$clear = self.$container.find('.' + self.clearButtonBaseClass);*/
         },
         _getClearClass: function () {
             var self = this;
@@ -591,19 +591,19 @@
     $.fn.ratingLocales.en = {
         defaultCaption: '{rating} Stars',
         starCaptions: {
-            0.5: 'Half Star',
-            1: 'Tres nul',
-            1.5: 'Nul',
-            2: 'Meh pas terrible',
-            2.5: 'Bof sa passe',
-            3: 'Ok.',
-            3.5: 'Bien',
-            4: 'Très bien',
-            4.5: 'Excellent !',
-            5: 'Incroyable !'
+            0.5: '1, Tres nul',
+            1: '1, Tres nul',
+            1.5: '1.5 Nul',
+            2: '2, Meh pas terrible',
+            2.5: '2.5, Bof sa passe',
+            3: '3, Ok.',
+            3.5: '3.5, Bien',
+            4: '4, Tres bien',
+            4.5: '4.5, Excellent !',
+            5: '5, Incroyable !'
         },
         clearButtonTitle: 'Clear',
-        clearCaption: 'Not Rated'
+        clearCaption: '-'
     };
 
     $.fn.rating.Constructor = Rating;
