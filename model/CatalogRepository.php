@@ -271,6 +271,7 @@ class CatalogRepository extends Repository{
             )
         );
 
+        var_dump($values[3]['var']);
         if($values[3]['var'] < 1){
             $values[3]['var'] = '1';
         }
@@ -278,6 +279,7 @@ class CatalogRepository extends Repository{
         
 
         $req = $this->queryPrepareExecute($queryToUse, $values);
+        $req = $this->unsetData($req);
 
     }
 
@@ -348,9 +350,12 @@ class CatalogRepository extends Repository{
             )
         );
 
+        if($values[1]['var'] < 1){
+            $values[1]['var'] = '1';
+        }
+
         $req = $this->queryPrepareExecute($queryToUse, $values);
         $req = $this->unsetData($req);
-
 
     }
 
