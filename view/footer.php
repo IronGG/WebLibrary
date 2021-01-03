@@ -9,7 +9,7 @@
 <footer class="footer mt-5">
     <div class="container-fluid bg-dark py-5">
         <div class="row text-center text-light">
-            <div class="col"><p>Ce site est à but uniquement pédagogique<br>Il a été cré par Laetitia Guidetti et Adrian Barreira</p></div>
+            <div class="col"><p>Ce site est à but uniquement pédagogique<br>Il a été créé par Laetitia Guidetti et Adrian Barreira</p></div>
             <div class="col"><p>ETML 2020<br>FIN2</p></div>
             <div class="col"><p>Nous contacter :<br>
             <a href="mailto:laetitia.guidetti@eduvaud.ch">laetitia.guidetti@eduvaud.ch</a><br>

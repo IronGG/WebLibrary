@@ -9,7 +9,7 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 mt-3">
                 <div class="media profile-head">
-                    <div class="profile mr-3"><img src="resources/images/catChibi.jpg" alt="..." width="130" height="130" class="rounded mb-2 img-thumbnail"></div>
+                    <div class="profile mr-3"><img src="resources/images/catChibi.jpg" alt="Image de profil" width="130" height="130" class="rounded mb-2 img-thumbnail"></div>
                     <div class="media-body mb-5">
                         <h4><?php echo $userData["usePseudo"] ?></h4>
                         <p>Inscrit depuis le : <?php $date = explode("-",$userData["useDate"]); echo $date[2] . "." . $date[1] . "." . $date[0];?> <br>
@@ -29,7 +29,7 @@
                     ?>
                         <div class="col mb-4">
                             <div class="card h-100">
-                                <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="...">
+                                <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="Couverture du manga">
                                 <div class="card-body">
                                     <a href="index.php?controller=catalog&action=detailBook&idBook=<?php echo htmlspecialchars($book['idBook']) ?>">
                                     <h6 class="card-title text-center"><?php echo $book['booTitle'] ?> </h6>
@@ -49,7 +49,7 @@
                 {
                     echo'<div class=" text-center mb-5">';
                     echo'<h5>Cette utilisateur n\'a jamais posté de livre</h5>';
-                    echo'<img class="mt-3" src="resources/images/cryCat.jpg" alt="Personnage de manga triste"> </div>';
+                    echo'<img class="mt-3" src="resources/images/cryCat.jpg" alt="Chat triste"> </div>';
                 }
                 ?>
             </div>

@@ -49,7 +49,7 @@
             <select class="form-control" id="chooseCate" name="chooseCate">
               <?php
               foreach ($lstCategories as $category) {
-                //https://www.daniweb.com/programming/web-development/threads/470322/keep-selceted-value-of-select-after-post-with-dynamic-data
+                //Source du code : https://www.daniweb.com/programming/web-development/threads/470322/keep-selceted-value-of-select-after-post-with-dynamic-data
                 echo "<option value=\"$category[idCategory]\"";
                 if (isset($_POST['chooseCate']) && $_POST['chooseCate'] == $category['idCategory']) {
                   echo "selected='selected'";

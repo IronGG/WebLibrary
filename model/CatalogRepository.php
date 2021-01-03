@@ -14,7 +14,14 @@ class CatalogRepository extends Repository{
     */
     public function __construct()
     {
-        $this->connector = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
+        include_once "config.php";
+        $dbName = $GLOBALS['database']['dbName'];
+        $user = $GLOBALS['database']['user'];
+        $password = $GLOBALS['database']['password'];
+        $host = $GLOBALS['database']['host'];
+        $charset = $GLOBALS['database']['charset'];
+
+        $this->connector = new PDO('mysql:host='.$host.';dbname='.$dbName.';charset='. $charset, $user, $password);
     }
 
 
@@ -42,7 +49,7 @@ class CatalogRepository extends Repository{
      *
      * @return array
      */
-    public function findBestHome() {
+    public function latestBooks() {
 
         $maVar1 = 0; // nombre de départ
         $maVar2i = 5; // nombre de répétition à afficher

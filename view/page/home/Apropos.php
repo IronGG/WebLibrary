@@ -3,13 +3,12 @@
   Auteur : Laetitia Guidetti et Adrian Barreira
   Date: Septembre à Décembre 2020
   Description : Page a propos contenant des informations sur le projet -->
-<h1 class="text-center mt-5 mb-5">A propos</h1>
+<h1 class="text-center mt-5 mb-5">À propos</h1>
 
 <h2 class="text-center mt-5">Description générale du site.</h2>
 <p class="container-sm text-center mt-3 mb-5">
 Ce site est un site de librairie en ligne avec différentes fonctionalitées telles que celle se connecter, 
 explorer un catalogue de livres avec filtres/tri, et ajouter des livres dans la base de donnée.
-Il a été realisé dans le cadre d'un projet qui s'est étendu sur 6 mois durant l'année 2020.
 </p>
     
 <div class="container mt-5">
@@ -20,26 +19,6 @@ Il a été realisé dans le cadre d'un projet qui s'est étendu sur 6 mois duran
         Ce projet est réalisé par Laetitia Guidetti et Adrian Barreira Romero à l'ETML, dans la classe FIN2, 2020-2021.
         </p>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 text-center">
-        <div class="col mb-5">
-        <!-- Adrian -->
-            <div>
-                <h3>Adrian Barreira Romero</h3>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text"></p>
-                </div>
-            </div>
-        </div>
-        <div class="col mb-5">
-        <!-- Laetiti -->
-            <div>
-                <h3>Laetitia Guidetti</h3>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h4 class="text-center">Auteurs :</h4>
+    <h5 class="text-center">Laetitia Guidetti et Adrian Barreira</h5>
 </div>

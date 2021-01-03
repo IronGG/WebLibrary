@@ -43,7 +43,7 @@ class HomeController extends Controller {
     private function indexAction() {
 
         $catalogRepository = new CatalogRepository();
-        $books = $catalogRepository->findBestHome();
+        $books = $catalogRepository->latestBooks();
 
         $view = file_get_contents('view/page/home/index.php');
         $bestseller = file_get_contents('view/page/home/list.php');
@@ -113,19 +113,25 @@ class HomeController extends Controller {
         }
         else
         {
-
             $registerRepository = new RegisterRepository();
-            $nbOfVotes = $registerRepository->ProfileNumberOfVotes($_GET['user']);
-
             $userData = $registerRepository->oneUserData($_GET['user']);
-            $view = file_get_contents('view/page/home/profil.php');
+            if ($userData["usePseudo"] == NULL)
+            {
+                header("Location: index.php?controller=home&action=index");
+            }
+            else
+            {
+                $nbOfVotes = $registerRepository->ProfileNumberOfVotes($_GET['user']);
 
-            $books = $registerRepository->bookAddByUser($_GET['user']);
-            ob_start();
-            eval('?>' . $view);
-            $content = ob_get_clean();
+                $view = file_get_contents('view/page/home/profil.php');
 
-            return $content;
+                $books = $registerRepository->bookAddByUser($_GET['user']);
+                ob_start();
+                eval('?>' . $view);
+                $content = ob_get_clean();
+
+                return $content;
+            }
         }
     }
 

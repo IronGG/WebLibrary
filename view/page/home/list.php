@@ -14,7 +14,7 @@ echo '<div class="container-xl">';
     ?>
         <div class="col mb-4">
             <div class="card h-100">
-                <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="...">
+                <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="Couverture du manga">
                 <div class="card-body">
                     <a href="index.php?controller=catalog&action=detailBook&idBook=<?php echo htmlspecialchars($book['idBook']) ?>">
                     <h6 class="card-title text-center"><?php echo $book['booTitle'] ?> </h6>
