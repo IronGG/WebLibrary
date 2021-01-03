@@ -112,23 +112,23 @@ class RegisterRepository extends Repository{
 
 
     // date de création Done
-    public function CreationDate() {
+    public function oneUserData($userName) {
 
-        $queryToUse = "SELECT useDate FROM t_user WHERE usePseudo = :username";
+        $queryToUse = "SELECT useDate, usePseudo, count(t_book.idUser) as nbBook FROM t_user left join t_book on t_user.idUser = t_book.idUser WHERE usePseudo =  :username";
 
         $values = array(
             1=> array(
                 'marker' => ':username',
-                'var' => $_GET['user'],
+                'var' => $userName,
                 'type' => PDO::PARAM_STR
             )
         );
 
         $req = $this->queryPrepareExecute($queryToUse, $values);
-        $eval = $this->formatData($req);
+        $user = $this->formatData($req);
         $req = $this->unsetData($req);
 
-        return $eval[0]['useDate'];
+        return $user[0];
 
     }
 
@@ -152,6 +152,26 @@ class RegisterRepository extends Repository{
         $req = $this->unsetData($req);
 
         return $eval[0]['votes'];
+
+    }
+
+    public function bookAddByUser($userName) {
+
+        $maVar1 = 0; // nombre de départ
+        $maVar2i = 3; // nombre de répétition à afficher
+        $queryToUse = "SELECT idBook, booCover, booAuthor, booTitle, catName, usePseudo FROM t_book natural join t_user natural join t_category where usePseudo = :userName ORDER BY idBook DESC LIMIT $maVar1, $maVar2i";
+        $values = array(
+            1=> array(
+                'marker' => ':userName',
+                'var' => $userName,
+                'type' => PDO::PARAM_STR
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $books = $this->formatData($req);
+        $req = $this->unsetData($req);
+
+        return $books;
 
     }
 

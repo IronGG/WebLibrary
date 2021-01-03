@@ -110,13 +110,10 @@ class HomeController extends Controller {
         $registerRepository = new RegisterRepository();
         $nbOfVotes = $registerRepository->ProfileNumberOfVotes($_GET['user']);
 
-        $date = $registerRepository->CreationDate();
-
-        $user = $_GET['user'];
-
+        $userData = $registerRepository->oneUserData($_GET['user']);
         $view = file_get_contents('view/page/home/profil.php');
 
-
+        $books = $registerRepository->bookAddByUser($_GET['user']);
         ob_start();
         eval('?>' . $view);
         $content = ob_get_clean();

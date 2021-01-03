@@ -233,11 +233,6 @@ class CatalogRepository extends Repository{
         $eval = $this->formatData($req);
         $req = $this->unsetData($req);
 
-        /*if(!($eval != null))
-        var_dump($eval);*/
-
-        //return $eval;
-
         return $eval[0]["eval"];
     }
 

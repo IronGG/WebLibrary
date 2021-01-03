@@ -7,40 +7,51 @@
     <div class="col-md-5 mx-auto">
         <!-- Profile widget -->
         <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 cover">
-                <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="resources/Profil/Other.PNG" alt="..." width="130" height="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
-                    <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0 text-dark"><?php echo $user ?></h4>
-                        <p class="small mb-4 text-dark"> <i class="fas fa-map-marker-alt mr-2"></i>Inscris depuis le : <?php echo $date ?> </p>
+            <div class="px-4 pt-0 mt-3">
+                <div class="media profile-head">
+                    <div class="profile mr-3"><img src="resources/images/catChibi.jpg" alt="..." width="130" height="130" class="rounded mb-2 img-thumbnail"></div>
+                    <div class="media-body mb-5">
+                        <h4><?php echo $userData["usePseudo"] ?></h4>
+                        <p>Inscris depuis le : <?php echo str_replace("-",".",$userData["useDate"]) ?> <br>
+                        Nombre de votes : <?php echo $nbOfVotes; ?> <br>
+                        Nombre de livres ajoutés : <?php echo $userData["nbBook"]; ?></p>
                     </div>
                 </div>
             </div>
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><?php echo $nbOfVotes ?></h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Votes</small>
-                    </li>
-                </ul>
-            </div>
-            <div class="px-4 py-3">
-                <h5 class="mb-0">About</h5>
-                <div class="p-4 rounded shadow-sm bg-light">
-                    <p class="font-italic mb-0">Web Developer</p>
-                    <p class="font-italic mb-0">Lives in New York</p>
-                    <p class="font-italic mb-0">Photographer</p>
-                </div>
-            </div>
             <div class="py-4 px-4">
+            <?php if ($books != NULL)
+            { ?>
+            <h5 class="mb-5">Derniers livres ajouté par <?php echo $userData["usePseudo"] ?> :</h5>
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Livres ajoutés</h5><a href="#" class="btn btn-link text-muted">Show all</a>
+                    <div class="row row-cols-1 row-cols-md-3">
+                    <?php
+                    foreach ($books as $book) {
+                    ?>
+                        <div class="col mb-4">
+                            <div class="card h-100">
+                                <img src="resources/images/<?php echo $book['booCover'] ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a href="index.php?controller=catalog&action=detailBook&idBook=<?php echo htmlspecialchars($book['idBook']) ?>">
+                                    <h6 class="card-title text-center"><?php echo $book['booTitle'] ?> </h6>
+                                    </a>
+                                    <p class="card-text"><small><?php echo "Auteur : " . $book['booAuthor'] . "<br>Catégorie : " . $book['catName'] . "<br>Ajouté par : " . '<a href="index.php?controller=home&action=profil&user=' . $book['usePseudo'] .'">' . $book['usePseudo'] . '</a>'; ?></small></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 mb-2 pl-lg-1"><img src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pr-lg-1 mb-2"><img src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pl-lg-1"><img src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
-                </div>
+                <?php
+            }
+            else
+                {
+                    echo'<div class=" text-center mb-5">';
+                    echo'<h5>Cette utilisateur n\'a jamais posté de livre</h5>';
+                    echo'<img class="mt-3" src="resources/images/cryCat.jpg" alt="Personnage de manga triste"> </div>';
+                }
+                ?>
             </div>
         </div>
     </div>
