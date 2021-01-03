@@ -59,7 +59,7 @@ class LoginController extends Controller {
     private function loginAction() {
 
         $registerRepository = new RegisterRepository();
-        $compte = $registerRepository->login($_POST['username'])->fetchAll();
+        $compte = $registerRepository->login($_POST['username']);
 
         $view = file_get_contents('view/page/login/logintest.php');
 

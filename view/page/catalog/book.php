@@ -50,7 +50,7 @@
           });
         </script>
       </div>
-      <div class="row px-4">
+      <div class="row px-3">
         <p>Résumé : <br><?php echo $book[0]['booAbstract']?></p>
       </div>
 </div>

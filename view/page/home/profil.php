@@ -12,7 +12,7 @@
                     <div class="profile mr-3"><img src="resources/images/catChibi.jpg" alt="..." width="130" height="130" class="rounded mb-2 img-thumbnail"></div>
                     <div class="media-body mb-5">
                         <h4><?php echo $userData["usePseudo"] ?></h4>
-                        <p>Inscris depuis le : <?php echo str_replace("-",".",$userData["useDate"]) ?> <br>
+                        <p>Inscrit depuis le : <?php $date = explode("-",$userData["useDate"]); echo $date[2] . "." . $date[1] . "." . $date[0];?> <br>
                         Nombre de votes : <?php echo $nbOfVotes; ?> <br>
                         Nombre de livres ajoutés : <?php echo $userData["nbBook"]; ?></p>
                     </div>

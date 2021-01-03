@@ -18,7 +18,7 @@
                     // Checkbox de toutes les catégories
                     foreach ($lstCategories as $category) {
                         echo '<div class="col-4 text-center">';
-                        echo '<p class="lead"><input type="checkbox" name="catChoose[]" value=' . $category["idCategory"] . '> ' . $category["catName"] . '</p>';
+                        echo '<p class="lead"><input type="checkbox" name="catChoose[]" id=' . $category["idCategory"] . ' value=' . $category["idCategory"] . '> <label for=' . $category["idCategory"] . '>'. $category["catName"] . '</label></p>';
                         echo '</div>';
                     }
                     ?>

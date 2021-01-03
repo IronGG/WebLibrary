@@ -11,23 +11,31 @@ class RegisterRepository extends Repository{
 
     public function __construct()
     {
-        try
-        {
-            $this->connector = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
-        }
-        catch (Exception $e)
-        {
-                die('Erreur : ' . $e->getMessage());
-        }
+        $this->connector = new PDO('mysql:host=localhost;dbname=bdwebprojet;charset=utf8', 'root', 'root');
+
     }
     
 
     public function register($username, $password) {
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $queryToUse = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES ('" . $username . "' , '" . $passwordHash . "', CURDATE())";
+        $queryToUse = "INSERT INTO t_user (usePseudo, usePassword, useDate) VALUES (:username , :passwordHash, CURDATE())";
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $username,
+                'type' => PDO::PARAM_STR
+            ),
+            2=> array(
+                'marker' => ':passwordHash',
+                'var' => $password,
+                'type' => PDO::PARAM_STR
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $req = $this->unsetData($req);
 
-        if ($this->querySimpleExecute($queryToUse) == TRUE) {
+        if ($req == TRUE) {
             echo "New record created successfully";
         } 
         else {  
@@ -37,8 +45,17 @@ class RegisterRepository extends Repository{
 
     public function login($username) {
 
-        $queryToUse = "SELECT * FROM t_user WHERE usePseudo = '$username'";
-        $userList = $this->querySimpleExecute($queryToUse);
+        $queryToUse = "SELECT usePseudo, usePassword FROM t_user WHERE usePseudo = :username";
+        $values = array(
+            1=> array(
+                'marker' => ':username',
+                'var' => $username,
+                'type' => PDO::PARAM_STR
+            )
+        );
+        $req = $this->queryPrepareExecute($queryToUse, $values);
+        $userList = $this->formatData($req);
+        $req = $this->unsetData($req);
 
         return $userList;
     }
@@ -48,7 +65,6 @@ class RegisterRepository extends Repository{
         if($this->accountVerification()){
             $this->register($_POST['username'], $_POST['password']);
         }
-
 
     }
 
@@ -63,8 +79,18 @@ class RegisterRepository extends Repository{
     
                     if(preg_match ('/.{8,50}/', $_POST['password']) == 1){
                         if($_POST['password'] == $_POST['confirm-password']){
-                            //$_SESSION['varcheck'] = $this->bdd->query("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll();
-                            if($this->querySimpleExecute("SELECT * FROM t_user WHERE usePseudo = '" . $_POST['username'] . "'")->fetchAll() == array() ){
+                            $queryToUse = "SELECT usePseudo FROM t_user WHERE usePseudo = :username";
+                            $values = array(
+                                1=> array(
+                                    'marker' => ':username',
+                                    'var' => $_POST['username'],
+                                    'type' => PDO::PARAM_STR
+                                )
+                            );
+                            $req = $this->queryPrepareExecute($queryToUse, $values);
+                            $user = $this->formatData($req);
+                            $req = $this->unsetData($req);
+                            if($user == array()){
                                 $_SESSION['username'] = $_POST['username'];
                                 $valid = true;
                             }
