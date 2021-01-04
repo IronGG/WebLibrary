@@ -61,12 +61,35 @@ class LoginController extends Controller {
         $registerRepository = new RegisterRepository();
         $compte = $registerRepository->login($_POST['username']);
 
-        $view = file_get_contents('view/page/login/logintest.php');
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
+        if(array_key_exists('password', $_POST)){
+            if(password_verify($_POST['password'], $compte[0]['usePassword'])){
+                if($_POST['password'] && $_POST['username']){
+                    $_SESSION['newLogin'] = true;
+                    $_SESSION['username'] = $compte[0]['usePseudo'];
+                    $_SESSION['connected'] = true;
+        
+                    header("Location: index.php?controller=home&action=index");
+                }
+                else{
+        
+                    $_SESSION['loginError'] = true;
+        
+                    header("Location: index.php?controller=login&action=index");
+                }
+            }
+            else{
+                $_SESSION['loginError'] = true;
+        
+                header("Location: index.php?controller=login&action=index");
+            }
+        }   
+        else{
+            if(array_key_exists('username', $_POST)){
+                header("Location: index.php?controller=login&action=index");
+            }
+            else{
+                header("Location: index.php?controller=home&action=index");
+            }
+        }
     }
 }
