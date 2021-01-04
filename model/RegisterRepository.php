@@ -119,16 +119,13 @@ class RegisterRepository extends Repository{
                             }
                         }
                         elseif(array_key_exists('password', $_POST)) {
-                            echo ' Les deux mots de passes ne sont pas identiques ';
+                            // Les deux mots de passes ne sont pas identiques
                         }
                     }
                     else{
-                        echo 'mdp pas assez long';
+                        // mdp pas assez long
                     }
                 }
-    
-                echo ' username enregistré ';
-    
             }
         }
 

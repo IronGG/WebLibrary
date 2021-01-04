@@ -98,3 +98,21 @@ body {
 	background-color: #1CA347;
 	border-color: #1CA347;
 }
+
+.btn-return {
+	background-color: #6c757d;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #6c757d;
+}
+.btn-return:hover,
+.btn-return:focus {
+	color: #fff;
+	background-color: #5a6268;
+	border-color: #545b62;
+}

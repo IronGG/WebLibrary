@@ -3,6 +3,7 @@
   Auteur : Laetitia Guidetti et Adrian Barreira
   Date: Septembre à Décembre 2020
   Description : Page pour la connexion -->
+
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="resources/custom/css/loginStyles.css" rel="stylesheet" id="bootstrap-css">
@@ -78,7 +79,7 @@
 										<div class="text-danger mb-5">
 										<h4>
 											<ul>' .
-											  "<li>Erreurs insérées non valides</li>"
+											  "<li>Valeurs insérées non valides</li>"
 											. '</ul>
 										</h4>
 									</div>';
@@ -109,7 +110,7 @@
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Pseudo" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mot de passe">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mot de passe  (8 char min)">
 									</div>
 									<div class="form-group">
 										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmer le mot de passe">
@@ -126,6 +127,7 @@
 						</div>
 					</div>
 				</div>
+				<a href="index.php?controller=home&action=index" class="form-control btn btn-return">Retour</a>
 			</div>
 		</div>
     </div>

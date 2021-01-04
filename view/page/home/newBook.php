@@ -26,7 +26,7 @@
     <div class="row">
     <!-- Couverture du livre -->
       <div class="col-3 form-group">
-        <label for="cover">Couverture du livre</label>
+        <label for="cover">Couverture du livre (jpeg)</label>
         <input type="file" class="form-control-file" id="cover" name="cover">
       </div>
       <div class="col-9">
