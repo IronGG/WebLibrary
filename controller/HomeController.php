@@ -1,34 +1,49 @@
 <?php
 /**
  * ETML
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Controler pour gérer les pages classiques
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Contrôleur pour les pages classiques
  */
+include_once 'model/VerifInsert.php';
 
 class HomeController extends Controller {
 
     /**
-     * Dispatch current action
+     * Permet de choisir l'action a effectuer
      *
      * @return mixed
      */
     public function display() {
 
-        $action = $_GET['action'] . "Action"; // listAction
+        
+        if(array_key_exists('action', $_GET)){
+            $action = $_GET['action'] . "Action"; // listAction
+        }
+        else{
+            $action = 'indexAction'; // listAction
+        }
 
-        return call_user_func(array($this, $action));
+        
+        if(method_exists(get_class($this), $action)){      
+            return call_user_func(array($this, $action));
+        }
+        else{
+            return call_user_func(array($this, "indexAction"));
+        }
+
+        //return call_user_func(array($this, $action));
     }
 
     /**
-     * Display Index Action
+     * Affichage de l'index
      *
      * @return string
      */
     private function indexAction() {
 
         $catalogRepository = new CatalogRepository();
-        $books = $catalogRepository->findBestHome();
+        $books = $catalogRepository->latestBooks();
 
         $view = file_get_contents('view/page/home/index.php');
         $bestseller = file_get_contents('view/page/home/list.php');
@@ -41,7 +56,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * Display Contact Action
+     * Affichage de la page A propos
      *
      * @return string
      */
@@ -58,15 +73,76 @@ class HomeController extends Controller {
     }
 
     /**
-     * Display Contact Action
+     * Affichage de la page d'insertion d'un nouveau livre
      *
      * @return string
      */
     private function newBookAction() {
-        $catalogRepository = new CatalogRepository();
-        $lstCategories = $catalogRepository->findAllCat();
 
-        $view = file_get_contents('view/page/home/newBook.php');
+        if (!isset($_SESSION['username']))
+        {
+            header("Location: index.php?controller=home&action=unConnected");
+        }
+        else
+        {
+            $catalogRepository = new CatalogRepository();
+            $lstCategories = $catalogRepository->findAllCat();
+            $verifData = new VerifInsert();
+
+            $view = file_get_contents('view/page/home/newBook.php');
+
+
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
+
+            return $content;
+        }
+    }
+
+    /**
+     * Affichage du profil d'un utilisateur
+     *
+     * @return void
+     */
+    private function profilAction() {
+
+        if (!isset($_SESSION['username']))
+        {
+            header("Location: index.php?controller=home&action=unConnected");
+        }
+        else
+        {
+            $registerRepository = new RegisterRepository();
+            $userData = $registerRepository->oneUserData($_GET['user']);
+            if ($userData["usePseudo"] == NULL)
+            {
+                header("Location: index.php?controller=home&action=index");
+            }
+            else
+            {
+                $nbOfVotes = $registerRepository->ProfileNumberOfVotes($_GET['user']);
+
+                $view = file_get_contents('view/page/home/profil.php');
+
+                $books = $registerRepository->bookAddByUser($_GET['user']);
+                ob_start();
+                eval('?>' . $view);
+                $content = ob_get_clean();
+
+                return $content;
+            }
+        }
+    }
+
+    /**
+     * Affichage de la page de non connexion
+     *
+     * @return void
+     */
+    private function unConnectedAction() {
+
+        $view = file_get_contents('view/page/home/unConnected.php');
 
 
         ob_start();

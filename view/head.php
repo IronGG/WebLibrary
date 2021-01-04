@@ -1,13 +1,14 @@
-<?php 
-    //session_start(); // Démarrer le système de session  
-    
-/*
-if($_SESSION == array()){
-    session_start(); // Démarrer le système de session  
-}*/
+<?php
+/**
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : head
+ */
+
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <!-- Required meta tags -->
@@ -16,7 +17,7 @@ if($_SESSION == array()){
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/stylesheet.css">
+    <link rel="stylesheet" href="resources/custom/css/stylesheet.css">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

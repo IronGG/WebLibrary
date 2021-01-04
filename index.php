@@ -2,10 +2,10 @@
 session_start();
 /**
  * ETML
- * Auteur :  Cindy Hardegger
- * Date: 22.01.2019
- * Site web en MVC et orienté objet
- */
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : index
+ */  
 
 $debug = false;
 
@@ -73,12 +73,13 @@ class MainController {
     protected function viewBuild($currentPage) {
 
             $content = $currentPage->display();
-
-            //var_dump($_POST);   
+  
+            // Si l'utilisateur a voulu se déconnecter -> déconnexion
             if(array_key_exists('disconnect', $_POST) && $_POST['disconnect']){
                     $_SESSION = array();
             }
 
+            // La page de login agit différement du reste
             if($currentPage instanceof LoginController && $_GET['action'] == 'index'){
                 echo $content;
             }

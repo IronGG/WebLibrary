@@ -1,9 +1,9 @@
 <?php
 /**
  * ETML
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Controler pour gérer les pages classiques
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Contrôleur pour la gestion du login
  */
 
 include_once 'model/RegisterRepository.php';
@@ -38,55 +38,77 @@ class LoginController extends Controller {
         return $content;
     }
 
+    /**
+     * Permet de s'inscrire ou d'envoyer une erreur s'il y'en a
+     *
+     * @return void
+     */
     private function registerAction() {
-        //$registerRepository = new RegisterRepository();
-        //$compte = $registerRepository->login('test')->fetchAll();*/
-        //$registerRepository = new RegisterRepository();
-        //$compte = $registerRepository->register($_POST['username'], $_POST['password']);
 
         $registerRepository = new RegisterRepository();
         $compte = $registerRepository->accountCreation();
 
-        $view = file_get_contents('view/page/login/register.php');
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
-    }
-
-    private function loginAction() {
-
-        $registerRepository = new RegisterRepository();
-        $compte = $registerRepository->login($_POST['username'])->fetchAll();
-
-        $view = file_get_contents('view/page/login/logintest.php');
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
+        // Si la personne est connectée -> impossibilité de s'inscrire par dessus
+        if(isset($_SESSION['username'])){
+            header("Location: index.php?controller=home&action=index");
+        }
+        else{
+        echo "<h1>ERROR</h1>";
+        $_SESSION['registerError'] = true;
+        header("Location: index.php?controller=login&action=index");
+        }
     }
 
     /**
-     * Check Form action
+     * Action login du controleur. Permet de se connecter et rediriger sur la bonne page en fonction des valeurs rentrées.
      *
-     * @return string
+     * @return void
      */
-    private function checkAction() {
+    private function loginAction() {
 
-        $lastName = htmlspecialchars($_POST['lastName']);
-        $firstName = htmlspecialchars($_POST['firstName']);
-        $answer = htmlspecialchars($_POST['answer']);
+        $registerRepository = new RegisterRepository();
+        $compte = $registerRepository->login($_POST['username']);
 
-        $view = file_get_contents('view/page/home/resume.php');
+        // contrôle la connection et renvoi sur la page en fonction des valeurs rentrées et celles de la bd
+        if(array_key_exists('password', $_POST)){
+            if(password_verify($_POST['password'], $compte[0]['usePassword'])){
+                if($_POST['password'] && $_POST['username']){
 
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
+                    // Si les valeurs sont justes -> connection (stockée dans deux variables de sessions permanentes, 'username' et 'connected')
 
-        return $content;
+                    $_SESSION['newLogin'] = true;
+                    $_SESSION['username'] = $compte[0]['usePseudo'];
+                    $_SESSION['connected'] = true;
+        
+                    header("Location: index.php?controller=home&action=index");
+                }
+                else{
+
+                    // Si par hasard $_POST['username'] n'existe pas, cette erreur sera déclanchée
+        
+                    $_SESSION['loginError'] = true;
+        
+                    header("Location: index.php?controller=login&action=index");
+                }
+            }
+            else{
+
+                // Mot de passe ne match pas avec celui de la bd
+
+                $_SESSION['loginError'] = true;
+        
+                header("Location: index.php?controller=login&action=index");
+            }
+        }   
+        else{
+            if(array_key_exists('username', $_POST)){
+                // Si l'utilisateur était sur la page de login -> redirige sur login
+                header("Location: index.php?controller=login&action=index");
+            }
+            else{
+                // Si l'utilisateur n'était pas sur la page de login (et n'a donc pas passé un POST) -> redirige sur home
+                header("Location: index.php?controller=home&action=index");
+            }
+        }
     }
 }

@@ -1,10 +1,10 @@
 <?php
 /**
- * Auteur : Cindy Hardegger
- * Date: 22.01.2019
- * Contrôleur principal
+ * ETML
+ * Auteur : Laetitia Guidetti et Adrian Barreira
+ * Date: Septembre à Décembre 2020
+ * Description : Contrôleur principal
  */
-
 abstract class Controller {
 
     /**
