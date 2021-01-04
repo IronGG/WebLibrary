@@ -43,7 +43,7 @@ class RegisterRepository extends Repository{
             ),
             2=> array(
                 'marker' => ':passwordHash',
-                'var' => $password,
+                'var' => $passwordHash,
                 'type' => PDO::PARAM_STR
             )
         );
