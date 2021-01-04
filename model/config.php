@@ -6,12 +6,12 @@
  * Description : Donnée utilisée pour la connexion à la DB
  */
 
-// Configur de base pour se connecter à la BD
+// Configuration de base pour se connecter à la BD
 
 $GLOBALS['database'] = array(
     "dbName" => "db_webproject",
-    "user" => "root",
-    "password" => "root",
+    "user" => "user",
+    "password" => ".Etml-",
     "charset" => "utf8",
     "host" => "localhost"
 );
