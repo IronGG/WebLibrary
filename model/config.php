@@ -10,8 +10,8 @@
 
 $GLOBALS['database'] = array(
     "dbName" => "db_webproject",
-    "user" => "root",
-    "password" => "root",
+    "user" => "user",
+    "password" => ".Etml-",
     "charset" => "utf8",
     "host" => "localhost"
 );
