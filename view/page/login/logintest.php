@@ -22,15 +22,6 @@ if(array_key_exists('password', $_POST)){
 
             header("Location: index.php?controller=login&action=index");
         }
-    
-        /*
-        echo $compte[0]['usePseudo'];
-    
-        $_SESSION['username'] = $compte[0]['usePseudo'];
-        var_dump($_SESSION);
-        echo $_SESSION['username'];
-    
-        */
     }
     else{
         $_SESSION['loginError'] = true;
@@ -46,11 +37,4 @@ else{
         header("Location: index.php?controller=home&action=index");
     }
 }
-
-//var_dump($compte);
-
-//echo "<h1>votre mot de passe est : " . $compte[0]['usePassword'] . "</h1>";
-//var_dump($resultat);
-
-//echo $comptes[5]['usePseudo'];
 ?>

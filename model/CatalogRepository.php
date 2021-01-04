@@ -273,7 +273,6 @@ class CatalogRepository extends Repository{
             )
         );
 
-        var_dump($values[3]['var']);
         if($values[3]['var'] < 1){
             $values[3]['var'] = '1';
         }
@@ -389,10 +388,6 @@ class CatalogRepository extends Repository{
         $eval = $this->formatData($req);
         $req = $this->unsetData($req);
 
-        /*if(!($eval != null))
-        var_dump($eval);*/
-
-        //return $eval;
         if(array_key_exists(0, $eval)){
             if(array_key_exists('evaGrade', $eval[0])){
                 return $eval[0]["evaGrade"];
