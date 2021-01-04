@@ -74,10 +74,12 @@ class MainController {
 
             $content = $currentPage->display();
   
+            // Si l'utilisateur a voulu se déconnecter -> déconnexion
             if(array_key_exists('disconnect', $_POST) && $_POST['disconnect']){
                     $_SESSION = array();
             }
 
+            // La page de login agit différement du reste
             if($currentPage instanceof LoginController && $_GET['action'] == 'index'){
                 echo $content;
             }

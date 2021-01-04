@@ -6,7 +6,7 @@
  * Description : Donnée utilisée pour la connexion à la DB
  */
 
-// Configur de base pour se connecter à la BD
+// Configuration de base pour se connecter à la BD
 
 $GLOBALS['database'] = array(
     "dbName" => "db_webproject",
