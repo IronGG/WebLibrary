@@ -9,6 +9,9 @@
 include_once "Repository.php";
 class RegisterRepository extends Repository{
 
+    /**
+     * Constructeur de RegisterRepository
+     */
     public function __construct()
     {
         include_once "config.php";
@@ -22,7 +25,12 @@ class RegisterRepository extends Repository{
 
     }
     
-
+    /**
+     * Inscrit un utilisateur dans la bd
+     *
+     * @param string $username
+     * @param string $password
+     */
     public function register($username, $password) {
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
@@ -41,15 +49,14 @@ class RegisterRepository extends Repository{
         );
         $req = $this->queryPrepareExecute($queryToUse, $values);
         $req = $this->unsetData($req);
-
-        if ($req == TRUE) {
-            echo "New record created successfully";
-        } 
-        else {  
-            echo "Error: " . $queryToUse . "<br>";
-        }
     }
 
+    /**
+     * Récupère le password en fonction du pseudo donné
+     *
+     * @param string $username
+     * @return array
+     */
     public function login($username) {
 
         $queryToUse = "SELECT usePseudo, usePassword FROM t_user WHERE usePseudo = :username";
@@ -67,6 +74,9 @@ class RegisterRepository extends Repository{
         return $userList;
     }
 
+    /**
+     * appele la méthode register si la vérification est acceptée
+     */
     public function accountCreation() {
 
         if($this->accountVerification()){
@@ -75,6 +85,9 @@ class RegisterRepository extends Repository{
 
     }
 
+    /**
+     * Vérification que les données entrées pour l'inscription sont valide
+     */
     public function accountVerification() {
 
         $valid = false;
@@ -122,7 +135,12 @@ class RegisterRepository extends Repository{
         return $valid;
     }
 
-    // DONE
+    /**
+     * Retourne l'id d'un utilisateur
+     *
+     * @param string $username
+     * @return int
+     */
     public function findUserId($username) {
 
         $queryToUse = "SELECT idUser FROM t_user WHERE usePseudo = :username";
@@ -143,8 +161,12 @@ class RegisterRepository extends Repository{
 
     }
 
-
-    // date de création Done
+    /**
+     * Retourne des infomrations conserent un utilisateur
+     *
+     * @param string $userName
+     * @return array
+     */
     public function oneUserData($userName) {
 
         $queryToUse = "SELECT useDate, usePseudo, count(t_book.idUser) as nbBook FROM t_user left join t_book on t_user.idUser = t_book.idUser WHERE usePseudo =  :username";
@@ -165,7 +187,12 @@ class RegisterRepository extends Repository{
 
     }
 
-    // nombre de votes Done
+    /**
+     * Retourne le nombre de vote d'un utilisateur
+     *
+     * @param string $pseudo
+     * @return int
+     */
     public function ProfileNumberOfVotes($pseudo) {
 
         $id = $this->findUserId($pseudo);
@@ -188,6 +215,12 @@ class RegisterRepository extends Repository{
 
     }
 
+    /**
+     * Retourne les 3 derniers livres ajouté par un utilisateur
+     *
+     * @param string $userName
+     * @return array
+     */
     public function bookAddByUser($userName) {
 
         $maVar1 = 0; // nombre de départ

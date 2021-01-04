@@ -221,10 +221,10 @@ class CatalogRepository extends Repository{
     }
 
     /**
-     * Retourne l'evalution d'un livre
+     * Retourne l'evalution moyenne d'un livre
      *
      * @param int $idBook
-     * @return int
+     * @return float
      */
     public function SearchEval($idBook)
     {
@@ -284,7 +284,11 @@ class CatalogRepository extends Repository{
 
     }
 
-    // nombre des votes DONE
+    /**
+     * Retourne le nombre de vote que possède un livre
+     *
+     * @return int
+     */
     public function NumberOfVotes() {
 
         $queryToUse = "SELECT COUNT(idBook) AS nbVotes FROM t_evaluate WHERE idBook = :id";
@@ -305,7 +309,11 @@ class CatalogRepository extends Repository{
 
     }
 
-    // stars already inserted (optional)
+    /**
+     * Retourne l'id de l'utilisateur correspondant à un pseudo
+     *
+     * @return int
+     */
     public function AlreadyVoted() {
 
         $queryToUse = "SELECT idUser FROM t_user WHERE usePseudo = :username";
@@ -326,7 +334,9 @@ class CatalogRepository extends Repository{
 
     }
 
-    // Modification Of Vote
+    /**
+     * modifie un vote entré par un utilisateur pour un livre
+     */
     public function VoteModify() {
         $queryToUse = "UPDATE t_evaluate SET evaGrade = :eval WHERE idUser = :idUser AND idBook = :idBook";
 
@@ -351,9 +361,15 @@ class CatalogRepository extends Repository{
             )
         );
 
+        // Si le nombre d'étoile est inférieur à 1
         if($values[1]['var'] < 1){
             $values[1]['var'] = '1';
         }
+        // Si le nombre d'étoile est supérieur à 5
+        if($values[1]['var'] > 5){
+            $values[1]['var'] = '5';
+        }
+
 
         $req = $this->queryPrepareExecute($queryToUse, $values);
         $req = $this->unsetData($req);

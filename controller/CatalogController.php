@@ -95,6 +95,7 @@ class CatalogController extends Controller {
                         $catalogRepository->VoteModify();
                     }
                 }
+                
 
                 $note = $catalogRepository->SearchEval($_GET['idBook']);
         
@@ -107,6 +108,7 @@ class CatalogController extends Controller {
                 if($note == null){
                     $note = 'Pas encore d\'évaluation';
                 }
+                $userEval = $catalogRepository->SearchUserEval();
 
                 $view = file_get_contents('view/page/catalog/book.php');
 
