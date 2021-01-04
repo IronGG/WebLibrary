@@ -9,7 +9,7 @@
 // Configur de base pour se connecter à la BD
 
 $GLOBALS['database'] = array(
-    "dbName" => "bdwebprojet",
+    "dbName" => "db_webproject",
     "user" => "root",
     "password" => "root",
     "charset" => "utf8",
