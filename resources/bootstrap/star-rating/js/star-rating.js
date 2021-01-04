@@ -591,14 +591,14 @@
     $.fn.ratingLocales.en = {
         defaultCaption: '{rating} Stars',
         starCaptions: {
-            0.5: '1, Tres nul',
-            1: '1, Tres nul',
+            0.5: '1, Très nul',
+            1: '1, Très nul',
             1.5: '1.5 Nul',
-            2: '2, Meh pas terrible',
-            2.5: '2.5, Bof sa passe',
+            2: '2, Pas terrible',
+            2.5: '2.5, Bof',
             3: '3, Ok.',
             3.5: '3.5, Bien',
-            4: '4, Tres bien',
+            4: '4, Très bien',
             4.5: '4.5, Excellent !',
             5: '5, Incroyable !'
         },
