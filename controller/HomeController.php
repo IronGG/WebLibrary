@@ -60,9 +60,9 @@ class HomeController extends Controller {
      *
      * @return string
      */
-    private function AproposAction() {
+    private function aProposAction() {
 
-        $view = file_get_contents('view/page/home/Apropos.php');
+        $view = file_get_contents('view/page/home/aPropos.php');
 
 
         ob_start();

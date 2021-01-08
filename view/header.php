@@ -22,8 +22,8 @@
             <li class="nav-item">
                 <a class="nav-link <?php if($_GET['controller'] == 'catalog' && $_GET['action'] == 'index') echo 'active';?>" href="index.php?controller=catalog&action=index">Catalogue</a>
             </li>
-            <li class="nav-item <?php if($_GET['controller'] == 'home' && $_GET['action'] == 'Apropos') echo 'active';?>">
-                <a class="nav-link" href="index.php?controller=home&action=Apropos">À propos</a>
+            <li class="nav-item <?php if($_GET['controller'] == 'home' && $_GET['action'] == 'aPropos') echo 'active';?>">
+                <a class="nav-link" href="index.php?controller=home&action=aPropos">À propos</a>
             </li> <!--
             <li class="nav-item">
                 <a class="nav-link" href="index.php?controller=home&action=newBook">Ajouter un livre</a>
