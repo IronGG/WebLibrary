@@ -14,7 +14,7 @@ class CatalogRepository extends Repository{
     */
     public function __construct()
     {
-        include_once "config.php";
+        include_once "config.ini.php";
         $dbName = $GLOBALS['database']['dbName'];
         $user = $GLOBALS['database']['user'];
         $password = $GLOBALS['database']['password'];
